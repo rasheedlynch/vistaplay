@@ -1,5 +1,14 @@
 import type { Metadata } from "next";
 
+import { ComoFunciona } from "@/components/marketing/como-funciona";
+import { Dispositivos } from "@/components/marketing/dispositivos";
+import { Faq } from "@/components/marketing/faq";
+import { FinalCta } from "@/components/marketing/final-cta";
+import { Hero } from "@/components/marketing/hero";
+import { Incluye } from "@/components/marketing/incluye";
+import { Planes } from "@/components/marketing/planes";
+import { TrustStrip } from "@/components/marketing/trust-strip";
+
 export const metadata: Metadata = {
   title: "VistaPlay — Televisión en streaming para tu hogar",
   description:
@@ -8,12 +17,15 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-4 p-8 text-center">
-      <h1 className="font-heading text-4xl font-semibold">VistaPlay</h1>
-      <p className="max-w-md text-base text-neutral-600">
-        Televisión en streaming para tu hogar. Estamos preparando la nueva
-        página — vuelve pronto.
-      </p>
-    </main>
+    <>
+      <Hero />
+      <TrustStrip />
+      <Incluye />
+      <ComoFunciona />
+      <Planes />
+      <Dispositivos />
+      <Faq />
+      <FinalCta />
+    </>
   );
 }
