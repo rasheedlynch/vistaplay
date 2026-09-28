@@ -46,6 +46,11 @@ IPTV reseller sites.
   metadata (generateMetadata), semantic HTML, exactly one H1 per page
 - Tailwind CSS 3.4 (do NOT upgrade to Tailwind 4)
 - shadcn/ui via shadcn@2.3.0 (the Tailwind 3 compatible version)
+- Colors must be defined as HSL channel CSS variables (e.g.
+  --primary: 11 100% 62%) and referenced in tailwind.config.ts as
+  hsl(var(--primary) / <alpha-value>), so opacity modifiers work in
+  Tailwind 3.4. When adding shadcn components, use
+  npx shadcn@2.3.0 add <name>
 - Framer Motion, restrained: hero reveals only, no animation soup
   (install in Stage 2, not now)
 - Later stages: Sanity CMS (blog), Stripe Checkout (subscriptions),
