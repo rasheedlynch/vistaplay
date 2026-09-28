@@ -68,10 +68,10 @@ const swatches: Swatch[] = [
   {
     name: "Coral tinta",
     token: "--coral-ink",
-    hex: "#CC1F00",
+    hex: "#CC2900",
     className: "bg-coral-ink",
     textClassName: "text-paper",
-    note: "Coral para texto y enlaces. Contraste sobre papel: 5.2:1.",
+    note: "Coral para texto y enlaces. Contraste sobre papel: 5.0:1.",
   },
   {
     name: "Tinte",
@@ -188,6 +188,7 @@ export default function StyleguidePage() {
             </div>
             <Separator />
             <div>
+              {/* TODO(client): confirm support response time */}
               <p className="text-body">
                 Nuestro equipo está disponible para resolver dudas antes y
                 después de contratar. Puedes escribirnos por WhatsApp o
@@ -198,6 +199,7 @@ export default function StyleguidePage() {
             </div>
             <Separator />
             <div>
+              {/* TODO(client): confirm VAT-included pricing claim */}
               <p className="text-small">
                 Los precios incluyen IVA. Consulta las condiciones de
                 contratación antes de suscribirte.
@@ -241,17 +243,20 @@ export default function StyleguidePage() {
             <Card>
               <CardHeader>
                 <div className="mb-2">
+                  {/* TODO(client): confirm this plan is genuinely the most-chosen before claiming it */}
                   <Badge>Plan más elegido</Badge>
                 </div>
                 <CardTitle className="font-heading text-xl">
                   Plan 12 meses
                 </CardTitle>
                 <CardDescription>
+                  {/* TODO(client): confirm annual-vs-monthly savings claim with real pricing */}
                   Ahorra frente al pago mensual con la suscripción anual.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <p className="text-body">
+                  {/* TODO(client): confirm 24h activation time */}
                   Incluye acceso completo desde tu móvil o tu televisor,
                   soporte por WhatsApp y activación en menos de 24 horas.
                 </p>
@@ -264,9 +269,32 @@ export default function StyleguidePage() {
                 marcados.
               </p>
               <div className="flex flex-wrap gap-2">
+                {/* TODO(client): confirm "no permanencia" contract terms */}
                 <Badge>Sin permanencia</Badge>
+                {/* TODO(client): confirm 24h activation time */}
                 <Badge>Activación en 24h</Badge>
                 <Badge>Soporte por WhatsApp</Badge>
+              </div>
+            </div>
+          </div>
+
+          <h3 className="text-h3 mb-4 mt-12">Badge sobre papel y tinte</h3>
+          <p className="text-small mb-4">
+            Fondo blanco + borde para mantenerse visible en ambos casos.
+          </p>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div className="rounded-2xl border border-line bg-paper p-6">
+              <p className="text-small mb-3">Sobre papel</p>
+              <div className="flex flex-wrap gap-2">
+                <Badge>Sin permanencia</Badge>
+                <Badge>Activación en 24h</Badge>
+              </div>
+            </div>
+            <div className="rounded-2xl border border-line bg-tint p-6">
+              <p className="text-small mb-3">Sobre tinte</p>
+              <div className="flex flex-wrap gap-2">
+                <Badge>Sin permanencia</Badge>
+                <Badge>Activación en 24h</Badge>
               </div>
             </div>
           </div>

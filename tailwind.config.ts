@@ -11,11 +11,6 @@ const config: Config = {
         heading: ["var(--font-sora)", "sans-serif"],
         sans: ["var(--font-inter)", "sans-serif"],
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 4px)",
-        sm: "calc(var(--radius) - 8px)",
-      },
       colors: {
         background: "hsl(var(--background) / <alpha-value>)",
         foreground: "hsl(var(--foreground) / <alpha-value>)",

@@ -18,6 +18,11 @@ IPTV reseller sites.
   or "mega"
 
 ## CONTENT RULES (strict)
+- Any unverified business claim (activation times, guarantees, contract
+  terms, prices/VAT, support SLAs, popularity/savings claims) must be
+  marked in the code with {/* TODO(client): ... */} right before the
+  text, and logged as a row in CLIENT_QUESTIONS.md. Remove both only
+  once the client confirms the fact in writing.
 - NEVER mention LaLiga EA Sports, Champions League, specific competitions,
   specific channel names, or channel counts unless the client has confirmed
   them in writing. Where such details would go, leave a clearly marked TODO:
