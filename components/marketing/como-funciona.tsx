@@ -33,7 +33,7 @@ export function ComoFunciona() {
               key={step.number}
               className="rounded-2xl border border-line bg-card p-6 shadow-soft"
             >
-              <span className="font-heading text-3xl font-bold text-coral-ink">
+              <span className="font-heading text-3xl font-bold text-brand">
                 {step.number}
               </span>
               <p className="font-heading mt-3 text-lg font-semibold text-ink">

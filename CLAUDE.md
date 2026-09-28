@@ -37,8 +37,8 @@ IPTV reseller sites.
 ## Brand system ("calm premium")
 - Light mode only
 - Colors: warm paper background #FAF7F2, deep ink-navy text #0E1B2C, one
-  confident coral accent #FF5A3C (CTAs, highlights), soft section tint
-  #EAF1FA, borders #E5DED4
+  confident deep teal accent #0F766E (CTAs, highlights, links), soft section
+  tint #EAF1FA, borders #E5DED4
 - Typography: Sora (headlines, semibold/bold) + Inter (body/UI), loaded via
   next/font
 - Style: generous whitespace, rounded-2xl cards, soft shadows. Whitespace = trust

@@ -9,11 +9,11 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-coral text-ink shadow-soft hover:brightness-95 active:brightness-90",
+        primary: "bg-brand text-white shadow-soft hover:bg-brand-hover active:bg-brand-hover",
         secondary:
           "border border-ink bg-transparent text-ink hover:bg-tint active:bg-tint/70",
         ghost: "bg-transparent text-ink hover:bg-tint active:bg-tint/70",
-        link: "!h-auto !p-0 text-coral-ink underline-offset-4 hover:underline",
+        link: "!h-auto !p-0 text-brand underline-offset-4 hover:underline",
       },
       size: {
         sm: "h-9 px-4 text-sm",

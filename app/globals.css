@@ -8,8 +8,8 @@
     --paper: 38 44% 96%;
     --ink: 214 52% 11%;
     --ink-muted: 214 20% 40%;
-    --coral: 9 100% 62%;
-    --coral-ink: 12 100% 40%;
+    --brand: 175 77% 26%;
+    --brand-hover: 175 77% 21%;
     --tint: 214 62% 95%;
     --line: 35 25% 86%;
     --white: 0 0% 100%;
@@ -25,8 +25,8 @@
     --popover: var(--white);
     --popover-foreground: var(--ink);
 
-    --primary: var(--coral);
-    --primary-foreground: var(--ink);
+    --primary: var(--brand);
+    --primary-foreground: var(--white);
 
     --secondary: var(--tint);
     --secondary-foreground: var(--ink);

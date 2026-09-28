@@ -38,7 +38,7 @@ export function Footer() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-small text-ink hover:text-coral-ink"
+                className="text-small text-ink hover:text-brand"
               >
                 {link.label}
               </a>
@@ -49,7 +49,7 @@ export function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-small text-ink hover:text-coral-ink"
+                className="text-small text-ink hover:text-brand"
               >
                 {link.label}
               </Link>

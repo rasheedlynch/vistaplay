@@ -56,9 +56,9 @@ const config: Config = {
   				DEFAULT: 'hsl(var(--ink) / <alpha-value>)',
   				muted: 'hsl(var(--ink-muted) / <alpha-value>)'
   			},
-  			coral: {
-  				DEFAULT: 'hsl(var(--coral) / <alpha-value>)',
-  				ink: 'hsl(var(--coral-ink) / <alpha-value>)'
+  			brand: {
+  				DEFAULT: 'hsl(var(--brand) / <alpha-value>)',
+  				hover: 'hsl(var(--brand-hover) / <alpha-value>)'
   			},
   			tint: 'hsl(var(--tint) / <alpha-value>)',
   			line: 'hsl(var(--line) / <alpha-value>)'
