@@ -12,8 +12,7 @@ const POINTS: { icon: LucideIcon; text: string }[] = [
   },
   {
     icon: MessageCircle,
-    // TODO(client): confirm support is staffed by people, not a bot
-    text: "Soporte humano por WhatsApp.",
+    text: "Soporte humano 24 horas por WhatsApp y email.",
   },
   {
     icon: MonitorSmartphone,
@@ -21,7 +20,6 @@ const POINTS: { icon: LucideIcon; text: string }[] = [
   },
   {
     icon: Unlock,
-    // TODO(client): confirm "sin permanencia" contract terms — see CLIENT_QUESTIONS.md
     text: "Sin permanencia.",
   },
 ];

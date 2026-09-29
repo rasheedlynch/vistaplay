@@ -231,21 +231,18 @@ export default function StyleguidePage() {
             </div>
             <Separator />
             <div>
-              {/* TODO(client): confirm support response time */}
               <p className="text-body">
-                Nuestro equipo está disponible para resolver dudas antes y
-                después de contratar. Puedes escribirnos por WhatsApp o
-                completar el formulario de contacto y te responderemos en
-                menos de 24 horas laborables.
+                Nuestro equipo ofrece soporte humano 24 horas, todos los
+                días, por WhatsApp y email. Estamos disponibles antes y
+                después de contratar.
               </p>
               <p className="text-small mt-1">body · Inter, 16px, interlineado 1.6</p>
             </div>
             <Separator />
             <div>
-              {/* TODO(client): confirm VAT-included pricing claim */}
               <p className="text-small">
-                Los precios incluyen IVA. Consulta las condiciones de
-                contratación antes de suscribirte.
+                Consulta las condiciones de contratación antes de
+                suscribirte.
               </p>
               <p className="text-small mt-1">small · Inter</p>
             </div>
@@ -299,9 +296,8 @@ export default function StyleguidePage() {
               </CardHeader>
               <CardContent>
                 <p className="text-body">
-                  {/* TODO(client): confirm 24h activation time */}
                   Incluye acceso completo desde tu móvil o tu televisor,
-                  soporte por WhatsApp y activación en menos de 24 horas.
+                  soporte humano 24 horas y activación en minutos.
                 </p>
               </CardContent>
             </Card>
@@ -312,10 +308,8 @@ export default function StyleguidePage() {
                 marcados.
               </p>
               <div className="flex flex-wrap gap-2">
-                {/* TODO(client): confirm "no permanencia" contract terms */}
                 <Badge>Sin permanencia</Badge>
-                {/* TODO(client): confirm 24h activation time */}
-                <Badge>Activación en 24h</Badge>
+                <Badge>Activación en minutos</Badge>
                 <Badge>Soporte por WhatsApp</Badge>
               </div>
             </div>
@@ -330,14 +324,14 @@ export default function StyleguidePage() {
               <p className="text-small mb-3">Sobre papel</p>
               <div className="flex flex-wrap gap-2">
                 <Badge>Sin permanencia</Badge>
-                <Badge>Activación en 24h</Badge>
+                <Badge>Activación en minutos</Badge>
               </div>
             </div>
             <div className="rounded-2xl border border-line bg-tint p-6">
               <p className="text-small mb-3">Sobre tinte</p>
               <div className="flex flex-wrap gap-2">
                 <Badge>Sin permanencia</Badge>
-                <Badge>Activación en 24h</Badge>
+                <Badge>Activación en minutos</Badge>
               </div>
             </div>
           </div>

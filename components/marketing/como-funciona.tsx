@@ -4,21 +4,21 @@ import { Section } from "@/components/layout/section";
 const STEPS = [
   {
     number: "1",
-    title: "Elige tu plan",
+    title: "Elige tu plan y envía el pedido",
     description:
-      "Compara los planes de 1, 3 y 12 meses y elige el que mejor se ajuste a ti.",
+      "Rellena el formulario con tus datos y el plan que prefieras. No necesitas pagar nada en este paso.",
   },
   {
     number: "2",
-    title: "Te contactamos por WhatsApp",
+    title: "Recibe por email el enlace de pago y las instrucciones",
     description:
-      "Recibimos tu solicitud y te escribimos para confirmar los datos y el pago.",
+      "Te enviamos el enlace de pago y los pasos a seguir. Si prefieres ir más rápido, escríbenos por WhatsApp.",
   },
   {
     number: "3",
     title: "Activa y empieza a ver",
     description:
-      "En cuanto todo esté listo, activamos tu acceso y puedes empezar a disfrutarlo.",
+      "En cuanto confirmes el pago, activamos tu acceso en minutos.",
   },
 ];
 

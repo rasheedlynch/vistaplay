@@ -11,21 +11,18 @@ export const faqs: Faq[] = [
   },
   {
     question: "¿Cómo funciona la activación?",
-    // TODO(client): confirm real activation time
     answer:
-      "Tras solicitar tu plan te contactamos por WhatsApp para confirmar los datos y el pago, y activamos tu acceso a continuación.",
+      "Activamos tu acceso en minutos tras confirmar tu pedido y el pago. Te avisamos por email o WhatsApp en cuanto esté listo.",
   },
   {
     question: "¿En qué dispositivos puedo verlo?",
-    // TODO(client): confirm supported device list
     answer:
-      "Puedes ver VistaPlay desde tu móvil, tu tablet y tu televisor. Consulta la sección de dispositivos para más detalle.",
+      "Es compatible con los dispositivos que ya tienes: móvil, tablet, ordenador y Smart TV.",
   },
   {
     question: "¿Puedo cancelar cuando quiera?",
-    // TODO(client): confirm real cancellation process and terms
     answer:
-      "Sí, nuestros planes no tienen permanencia. Escríbenos por WhatsApp para gestionar la cancelación.",
+      "Sí, nuestros planes no tienen permanencia. Además, si no quedas satisfecho en las primeras 24 horas, te devolvemos el dinero.",
   },
   {
     question: "¿Qué métodos de pago aceptáis?",

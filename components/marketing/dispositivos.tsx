@@ -1,25 +1,29 @@
-import { Cast, Smartphone, Tv } from "lucide-react";
+import { Laptop, Smartphone, Tablet, Tv } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 
-// TODO(client): confirm the real list of supported device types/platforms
 const DEVICES: { icon: LucideIcon; name: string; description: string }[] = [
   {
     icon: Smartphone,
-    name: "Smartphones y tablets (Android e iOS)",
-    description: "Lleva VistaPlay contigo, estés donde estés.",
+    name: "Móvil",
+    description: "Accede desde cualquier lugar con tu teléfono.",
+  },
+  {
+    icon: Tablet,
+    name: "Tablet",
+    description: "Disfruta en una pantalla más grande sin perder movilidad.",
+  },
+  {
+    icon: Laptop,
+    name: "Ordenador",
+    description: "Míralo desde el navegador de tu Mac o PC.",
   },
   {
     icon: Tv,
     name: "Smart TV",
     description: "Disfruta en la pantalla grande de tu salón.",
-  },
-  {
-    icon: Cast,
-    name: "Dispositivos de streaming para TV",
-    description: "Conecta tu televisor a través de tu dispositivo de streaming.",
   },
 ];
 
@@ -29,9 +33,10 @@ export function Dispositivos() {
       <Container>
         <h2 className="text-h2">Dispositivos</h2>
         <p className="text-lead mt-4">
-          Accede a VistaPlay desde los dispositivos que ya usas en casa.
+          Compatible con los dispositivos que ya tienes: móvil, tablet,
+          ordenador y Smart TV.
         </p>
-        <ul className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
           {DEVICES.map(({ icon: Icon, name, description }) => (
             <li
               key={name}
