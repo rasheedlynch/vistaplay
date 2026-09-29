@@ -48,6 +48,7 @@ export function Planes() {
                 <Button asChild className="w-full">
                   <Link href={`/contratar?plan=${plan.id}`}>
                     Solicitar este plan
+                    <span className="sr-only"> — {plan.name}</span>
                   </Link>
                 </Button>
               </CardFooter>

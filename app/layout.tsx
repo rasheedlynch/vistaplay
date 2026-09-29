@@ -1,8 +1,12 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Sora, Inter } from "next/font/google";
 
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
+import { JsonLd } from "@/components/seo/json-ld";
+import { buildMetadata, DEFAULT_TITLE, THEME_COLOR, TITLE_TEMPLATE } from "@/lib/seo";
+import { site } from "@/lib/site";
+import { getOrganizationJsonLd, getWebSiteJsonLd } from "@/lib/structured-data";
 
 import "./globals.css";
 
@@ -18,9 +22,16 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "VistaPlay — Televisión en streaming para tu hogar",
-  description:
-    "VistaPlay es un servicio de televisión en streaming pensado para hogares en España: canales nacionales, deporte, cine, series y documentales en tu móvil o tu TV.",
+  metadataBase: new URL(site.url),
+  ...buildMetadata(),
+  title: {
+    default: DEFAULT_TITLE,
+    template: TITLE_TEMPLATE,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: THEME_COLOR,
 };
 
 export default function RootLayout({
@@ -31,6 +42,8 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${sora.variable} ${inter.variable} antialiased`}>
+        <JsonLd data={getOrganizationJsonLd()} />
+        <JsonLd data={getWebSiteJsonLd()} />
         <Header />
         <main>{children}</main>
         <Footer />

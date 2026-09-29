@@ -72,7 +72,7 @@ export function Header() {
               aria-label="Abrir menú"
               className="inline-flex h-10 w-10 items-center justify-center rounded-xl text-ink md:hidden"
             >
-              <Menu className="h-6 w-6" />
+              <Menu className="h-6 w-6" aria-hidden="true" />
             </button>
           </SheetTrigger>
           <SheetContent side="right" className="flex flex-col gap-8 bg-paper">

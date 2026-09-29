@@ -46,14 +46,14 @@ export function Incluye() {
           Un único acceso con el contenido organizado por categorías, para
           que encuentres lo que buscas sin complicarte.
         </p>
-        <ul className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
           {CATEGORIES.map(({ icon: Icon, name, description }) => (
             <li
               key={name}
-              className="rounded-2xl border border-line bg-card p-6 shadow-soft"
+              className="rounded-2xl border border-line bg-card p-4 shadow-soft sm:p-6"
             >
-              <Icon className="h-6 w-6 text-brand" aria-hidden="true" />
-              <p className="font-heading mt-3 text-base font-semibold text-ink">
+              <Icon className="h-5 w-5 text-brand sm:h-6 sm:w-6" aria-hidden="true" />
+              <p className="font-heading mt-3 text-sm font-semibold text-ink sm:text-base">
                 {name}
               </p>
               <p className="text-small mt-1">{description}</p>

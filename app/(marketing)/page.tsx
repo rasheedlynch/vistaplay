@@ -8,16 +8,16 @@ import { Hero } from "@/components/marketing/hero";
 import { Incluye } from "@/components/marketing/incluye";
 import { Planes } from "@/components/marketing/planes";
 import { TrustStrip } from "@/components/marketing/trust-strip";
+import { JsonLd } from "@/components/seo/json-ld";
+import { buildMetadata } from "@/lib/seo";
+import { getFaqJsonLd } from "@/lib/structured-data";
 
-export const metadata: Metadata = {
-  title: "VistaPlay — Televisión en streaming para tu hogar",
-  description:
-    "VistaPlay es un servicio de televisión en streaming pensado para hogares en España: canales nacionales, deporte, cine, series y documentales en tu móvil o tu TV.",
-};
+export const metadata: Metadata = buildMetadata({ path: "/" });
 
 export default function Home() {
   return (
     <>
+      <JsonLd data={getFaqJsonLd()} />
       <Hero />
       <TrustStrip />
       <Incluye />

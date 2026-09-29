@@ -15,14 +15,13 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Guía de estilo — VistaPlay",
-  robots: {
-    index: false,
-    follow: false,
-  },
-};
+export const metadata: Metadata = buildMetadata({
+  title: "Guía de estilo",
+  path: "/styleguide",
+  noIndex: true,
+});
 
 type Swatch = {
   name: string;
