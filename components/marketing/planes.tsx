@@ -21,6 +21,9 @@ export function Planes() {
                 <CardTitle className="font-heading text-xl">
                   {plan.name}
                 </CardTitle>
+                <p className="text-small font-medium text-brand">
+                  {plan.subtitle}
+                </p>
                 <p className="text-small">{plan.billingNote}</p>
               </CardHeader>
               <CardContent className="flex-1">

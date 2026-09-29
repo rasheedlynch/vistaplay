@@ -41,9 +41,9 @@ const FAQS = [
 export function Faq() {
   return (
     <Section id="preguntas" variant="paper">
-      <Container className="max-w-3xl">
+      <Container>
         <h2 className="text-h2">Preguntas frecuentes</h2>
-        <Accordion type="single" collapsible className="mt-8">
+        <Accordion type="single" collapsible className="mt-8 max-w-3xl">
           {FAQS.map((faq) => (
             <AccordionItem key={faq.question} value={faq.question}>
               <AccordionTrigger>{faq.question}</AccordionTrigger>
