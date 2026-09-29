@@ -1,35 +1,46 @@
 "use server";
 
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { Resend } from "resend";
 
 import { renderConfirmationEmail, renderNotificationEmail } from "@/lib/emails";
 import { orderSchema } from "@/lib/order";
-import type { OrderFormState, OrderFormValues } from "@/lib/order-helpers";
+import { ORDER_COOKIE_NAME, type OrderFormState, type OrderFormValues } from "@/lib/order-helpers";
 
 const MIN_SUBMIT_MS = 2000;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX = 5;
+const ORDER_COOKIE_MAX_AGE = 10 * 60; // seconds
 
 // Simple in-memory limiter — resets on server restart/cold start, and is
 // per-instance only. Good enough for this scale; not a distributed limiter.
-const submissionsByKey = new Map<string, number[]>();
+// Only successful submissions are recorded (see recordSuccess); validation
+// failures, honeypot hits, etc. never count against the limit.
+const successesByKey = new Map<string, number[]>();
 
 function isRateLimited(key: string): boolean {
   const now = Date.now();
-  const recent = (submissionsByKey.get(key) ?? []).filter(
+  const recent = (successesByKey.get(key) ?? []).filter(
+    (timestamp) => now - timestamp < RATE_LIMIT_WINDOW_MS
+  );
+  successesByKey.set(key, recent);
+  return recent.length >= RATE_LIMIT_MAX;
+}
+
+function recordSuccess(key: string): void {
+  const now = Date.now();
+  const recent = (successesByKey.get(key) ?? []).filter(
     (timestamp) => now - timestamp < RATE_LIMIT_WINDOW_MS
   );
   recent.push(now);
-  submissionsByKey.set(key, recent);
-  return recent.length > RATE_LIMIT_MAX;
+  successesByKey.set(key, recent);
 }
 
 // React resets <form action={...}> after the action returns (unless it
 // redirects), so uncontrolled inputs can't just keep their live DOM value —
 // we echo back what was submitted and the form re-mounts with it as
-// defaultValue/defaultChecked.
+// defaultValue.
 function extractValues(formData: FormData): OrderFormValues {
   return {
     name: String(formData.get("name") ?? ""),
@@ -37,8 +48,6 @@ function extractValues(formData: FormData): OrderFormValues {
     email: String(formData.get("email") ?? ""),
     plan: String(formData.get("plan") ?? ""),
     device: String(formData.get("device") ?? ""),
-    privacyConsent: formData.get("privacyConsent") === "on",
-    activationConsent: formData.get("activationConsent") === "on",
   };
 }
 
@@ -162,10 +171,21 @@ export async function submitOrder(
     };
   }
 
-  const thankYouParams = new URLSearchParams({
-    name: order.name,
-    plan: order.plan,
-    device: order.device,
+  recordSuccess(rateLimitKey);
+
+  // No personal data in the URL: a short-lived httpOnly cookie carries just
+  // enough for the thank-you page's greeting and WhatsApp prefill.
+  const firstName = order.name.trim().split(/\s+/)[0];
+  const cookieStore = await cookies();
+  cookieStore.set({
+    name: ORDER_COOKIE_NAME,
+    value: JSON.stringify({ firstName, plan: order.plan, device: order.device }),
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    maxAge: ORDER_COOKIE_MAX_AGE,
   });
-  redirect(`/gracias?${thankYouParams.toString()}`);
+
+  redirect("/gracias");
 }

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import Link from "next/link";
 
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
-import { deviceLabel, planLabel } from "@/lib/order-helpers";
+import { deviceLabel, ORDER_COOKIE_NAME, planLabel } from "@/lib/order-helpers";
 import { buildMetadata } from "@/lib/seo";
 import { getWhatsAppUrl } from "@/lib/site";
 
@@ -14,19 +15,31 @@ export const metadata: Metadata = buildMetadata({
   noIndex: true,
 });
 
-type GraciasPageProps = {
-  searchParams: Promise<{ name?: string; plan?: string; device?: string }>;
+type OrderCookie = {
+  firstName?: string;
+  plan?: string;
+  device?: string;
 };
 
-export default async function GraciasPage({ searchParams }: GraciasPageProps) {
-  const params = await searchParams;
-  const name = params.name?.trim();
-  const planText = params.plan ? planLabel(params.plan) : null;
-  const deviceText = params.device ? deviceLabel(params.device) : null;
+async function readOrderCookie(): Promise<OrderCookie> {
+  const cookieStore = await cookies();
+  const raw = cookieStore.get(ORDER_COOKIE_NAME)?.value;
+  if (!raw) return {};
+  try {
+    return JSON.parse(raw) as OrderCookie;
+  } catch {
+    return {};
+  }
+}
+
+export default async function GraciasPage() {
+  const { firstName, plan, device } = await readOrderCookie();
+  const planText = plan ? planLabel(plan) : null;
+  const deviceText = device ? deviceLabel(device) : null;
 
   const messageLines = [
     "Hola, acabo de enviar mi pedido en VistaPlay.",
-    name && `Soy ${name}.`,
+    firstName && `Soy ${firstName}.`,
     planText && `Plan: ${planText}.`,
     deviceText && `Dispositivo: ${deviceText}.`,
     "¿Podemos activar el acceso?",
@@ -39,8 +52,8 @@ export default async function GraciasPage({ searchParams }: GraciasPageProps) {
       <Container className="max-w-2xl text-center">
         <h1 className="text-h1">Gracias, hemos recibido tu pedido</h1>
         <p className="text-lead mt-4">
-          {name ? `${name}, en` : "En"} unos minutos recibirás un email con
-          el enlace de pago y las instrucciones para activar tu acceso.
+          {firstName ? `${firstName}, en` : "En"} breve recibirás un email
+          con el enlace de pago y las instrucciones para activar tu acceso.
           Revisa también tu carpeta de spam, por si acaso.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">

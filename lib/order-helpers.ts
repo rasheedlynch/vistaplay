@@ -10,8 +10,6 @@ export type OrderFormValues = {
   email: string;
   plan: string;
   device: string;
-  privacyConsent: boolean;
-  activationConsent: boolean;
 };
 
 export type OrderFormState = {
@@ -25,6 +23,10 @@ export type OrderFormState = {
 };
 
 export const initialOrderFormState: OrderFormState = { status: "idle" };
+
+// Short-lived cookie carrying just enough for the thank-you page's greeting
+// and WhatsApp prefill — never the full order (no email/phone in it).
+export const ORDER_COOKIE_NAME = "vp_order";
 
 export function planLabel(planId: string): string {
   return plans.find((plan) => plan.id === planId)?.name ?? planId;

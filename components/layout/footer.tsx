@@ -12,10 +12,10 @@ const NAV_LINKS = [
 
 const LEGAL_LINKS = [
   { href: "/aviso-legal", label: "Aviso legal" },
-  { href: "/politica-privacidad", label: "Política de privacidad" },
-  { href: "/politica-cookies", label: "Política de cookies" },
-  { href: "/condiciones-contratacion", label: "Condiciones de contratación" },
-  { href: "/derecho-desistimiento", label: "Derecho de desistimiento" },
+  { href: "/privacidad", label: "Política de privacidad" },
+  { href: "/cookies", label: "Política de cookies" },
+  { href: "/condiciones", label: "Condiciones de contratación" },
+  { href: "/desistimiento", label: "Derecho de desistimiento" },
 ];
 
 export function Footer() {

@@ -32,14 +32,22 @@ Cada una está marcada en el código con un comentario `TODO(client)`.
 
 ## Pendiente de revisión legal
 
-Texto ya confirmado por el cliente pero marcado `TODO(lawyer)` en el
-código hasta que un abogado lo revise:
+### Para el email de pago (TODO lawyer)
 
-- Casilla de renuncia al derecho de desistimiento en el formulario de
-  pedido (`components/marketing/order-form.tsx`): "Solicito la
-  activación inmediata del servicio y acepto que, una vez activado,
-  pierdo el derecho de desistimiento, sin perjuicio de la garantía de
-  satisfacción de 24 horas."
+El formulario de pedido (`components/marketing/order-form.tsx`) ya no
+pide consentimiento explícito — solo nombre, teléfono, email, plan y
+dispositivo. El siguiente texto de renuncia al derecho de
+desistimiento debe incluirse en el email/página de pago (aún no
+implementado) para que el cliente lo acepte en el momento de pagar, no
+en el formulario de contacto inicial:
+
+> "Solicito la activación inmediata del servicio y acepto que, una vez
+> activado, pierdo el derecho de desistimiento, sin perjuicio de la
+> garantía de satisfacción de 24 horas."
+
+Pendiente de revisión por un abogado antes de usarse, y pendiente de
+decidir el mecanismo de aceptación (checkbox en la página de pago,
+confirmación por email, etc.).
 
 ## Regla a partir de ahora
 

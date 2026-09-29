@@ -2,14 +2,13 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useState } from "react";
 
 import { submitOrder } from "@/app/actions/order";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select } from "@/components/ui/select";
@@ -25,23 +24,21 @@ export function OrderForm() {
   const searchParams = useSearchParams();
   const planParam = searchParams.get("plan");
 
+  // Only used to preselect on first load (e.g. a "Solicitar este plan"
+  // deep link). Intentionally never re-synced after mount — the user's
+  // own selection must always win, even if the URL doesn't change to
+  // match it.
   const [selectedPlan, setSelectedPlan] = useState(
     planParam && planIds.includes(planParam) ? planParam : DEFAULT_PLAN_ID
   );
   const [renderedAt] = useState(() => Date.now());
   const [state, formAction, isPending] = useActionState(submitOrder, initialOrderFormState);
 
-  useEffect(() => {
-    if (planParam && planIds.includes(planParam)) {
-      setSelectedPlan(planParam);
-    }
-  }, [planParam]);
-
   const fieldErrors = state.fieldErrors;
   const formValues = state.values;
   // React resets <form action={...}> after the action returns, clearing
   // uncontrolled inputs — remounting with a key tied to the echoed values
-  // lets defaultValue/defaultChecked restore what the user typed.
+  // lets defaultValue restore what the user typed.
   const formKey = formValues ? JSON.stringify(formValues) : "initial";
   const whatsappUrl = getWhatsAppUrl(
     "Hola, quiero contratar un plan de VistaPlay pero he tenido un problema con el formulario del pedido."
@@ -103,8 +100,7 @@ export function OrderForm() {
                     placeholder="612 345 678"
                     defaultValue={formValues?.phone}
                     required
-                    pattern="^(\+34|0034|34)?[\s\-\.]?[67]\d{2}[\s\-\.]?\d{3}[\s\-\.]?\d{3}$"
-                    title="Teléfono español, con o sin prefijo +34"
+                    maxLength={15}
                     aria-invalid={Boolean(fieldErrors?.phone)}
                     aria-describedby={fieldErrors?.phone ? "order-phone-error" : undefined}
                   />
@@ -125,6 +121,7 @@ export function OrderForm() {
                   autoComplete="email"
                   defaultValue={formValues?.email}
                   required
+                  maxLength={254}
                   aria-invalid={Boolean(fieldErrors?.email)}
                   aria-describedby={fieldErrors?.email ? "order-email-error" : undefined}
                 />
@@ -188,62 +185,6 @@ export function OrderForm() {
                 </div>
               </div>
 
-              {/* No `required` on these: Radix Checkbox's hidden native input for
-                  form submission isn't focusable, so native validation can't show
-                  its bubble on it and silently blocks submit. Server-side zod
-                  (fieldErrors below) validates consent instead. */}
-              <div className="space-y-4 border-t border-line pt-6">
-                <div className="flex items-start gap-3">
-                  <Checkbox
-                    id="order-privacy"
-                    name="privacyConsent"
-                    defaultChecked={formValues?.privacyConsent}
-                    className="mt-0.5"
-                    aria-invalid={Boolean(fieldErrors?.privacyConsent)}
-                    aria-describedby={
-                      fieldErrors?.privacyConsent ? "order-privacy-error" : undefined
-                    }
-                  />
-                  <Label htmlFor="order-privacy" className="text-ink-muted">
-                    He leído y acepto la{" "}
-                    <Link href="/privacidad" className="text-brand underline-offset-4 hover:underline">
-                      política de privacidad
-                    </Link>
-                    .
-                  </Label>
-                </div>
-                {fieldErrors?.privacyConsent && (
-                  <p id="order-privacy-error" className="text-small text-destructive">
-                    {fieldErrors.privacyConsent}
-                  </p>
-                )}
-
-                <div className="flex items-start gap-3">
-                  <Checkbox
-                    id="order-activation"
-                    name="activationConsent"
-                    defaultChecked={formValues?.activationConsent}
-                    className="mt-0.5"
-                    aria-invalid={Boolean(fieldErrors?.activationConsent)}
-                    aria-describedby={
-                      fieldErrors?.activationConsent ? "order-activation-error" : undefined
-                    }
-                  />
-                  {/* TODO(lawyer): review this withdrawal-of-right waiver before launch */}
-                  <Label htmlFor="order-activation" className="text-ink-muted">
-                    Solicito la activación inmediata del servicio y acepto
-                    que, una vez activado, pierdo el derecho de
-                    desistimiento, sin perjuicio de la garantía de
-                    satisfacción de 24 horas.
-                  </Label>
-                </div>
-                {fieldErrors?.activationConsent && (
-                  <p id="order-activation-error" className="text-small text-destructive">
-                    {fieldErrors.activationConsent}
-                  </p>
-                )}
-              </div>
-
               {state.status === "error" && state.message && (
                 <div role="alert" className="rounded-xl border border-destructive/30 bg-destructive/5 p-4">
                   <p className="text-body text-destructive">{state.message}</p>
@@ -264,6 +205,17 @@ export function OrderForm() {
                 <p className="text-small mt-3 text-center">
                   No pagas nada ahora. Te enviaremos el enlace de pago por
                   email.
+                </p>
+                <p className="text-small mt-1 text-center">
+                  Usaremos tus datos solo para gestionar tu pedido. Más
+                  información en la{" "}
+                  <Link
+                    href="/privacidad"
+                    className="text-brand underline-offset-4 hover:underline"
+                  >
+                    política de privacidad
+                  </Link>
+                  .
                 </p>
               </div>
             </form>
