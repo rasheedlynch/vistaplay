@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
+import { Logo } from "@/components/brand/logo";
+import { LogoMark } from "@/components/brand/logo-mark";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { Badge } from "@/components/ui/badge";
@@ -117,6 +120,47 @@ export default function StyleguidePage() {
             componentes y estructura. Esta página no forma parte del sitio
             público.
           </p>
+        </Container>
+      </Section>
+
+      <Section variant="tint">
+        <Container>
+          <h2 className="text-h2 mb-8">Logo</h2>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="rounded-2xl border border-line bg-card p-6 shadow-soft">
+              <div className="flex h-16 items-center">
+                <Logo className="text-2xl" />
+              </div>
+              <p className="text-small mt-4">Logo · lockup completo</p>
+            </div>
+            <div className="rounded-2xl border border-line bg-card p-6 shadow-soft">
+              <div className="flex h-16 items-center">
+                <LogoMark className="h-12 w-12" />
+              </div>
+              <p className="text-small mt-4">LogoMark · variant=&quot;default&quot;</p>
+            </div>
+            <div className="rounded-2xl border border-line bg-ink p-6 shadow-soft">
+              <div className="flex h-16 items-center">
+                <LogoMark variant="mono" className="h-12 w-12 text-paper" />
+              </div>
+              <p className="text-small mt-4 text-paper/70">
+                LogoMark · variant=&quot;mono&quot; sobre tinta
+              </p>
+            </div>
+            <div className="rounded-2xl border border-line bg-card p-6 shadow-soft">
+              <div className="flex h-16 items-center gap-4">
+                <Image src="/icon" alt="" width={32} height={32} className="rounded-md" />
+                <Image
+                  src="/apple-icon"
+                  alt=""
+                  width={56}
+                  height={56}
+                  className="rounded-xl"
+                />
+              </div>
+              <p className="text-small mt-4">Icono de la app · /icon y /apple-icon</p>
+            </div>
+          </div>
         </Container>
       </Section>
 

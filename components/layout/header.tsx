@@ -4,6 +4,7 @@ import { Menu } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import { Logo } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -39,9 +40,8 @@ export function Header() {
       )}
     >
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* TODO(client): replace text wordmark with logo asset */}
-        <Link href="/" className="font-heading text-xl font-bold text-ink">
-          VistaPlay
+        <Link href="/">
+          <Logo className="text-xl" />
         </Link>
 
         <nav

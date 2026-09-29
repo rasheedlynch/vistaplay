@@ -19,9 +19,8 @@ Cada una está marcada en el código con un comentario `TODO(client)`.
 | 11 | Métodos de pago aceptados | Homepage, FAQ ("¿Qué métodos de pago aceptáis?") | Qué métodos de pago se ofrecerán realmente |
 | 12 | Número de WhatsApp Business | `lib/site.ts` (`NEXT_PUBLIC_WHATSAPP_NUMBER`, actualmente vacío) | Número real de contacto para las solicitudes por WhatsApp |
 | 13 | Precio de cada plan | `lib/plans.ts` (`price: null` en los 3 planes) | Precio de los planes de 1, 3 y 12 meses |
-| 14 | Logo de la organización | `lib/structured-data.ts` (schema Organization, campo `logo` omitido) | URL de un logo definitivo para los datos estructurados y los iconos del sitio |
-| 15 | Punto de contacto de la organización | `lib/structured-data.ts` (schema Organization, campo `contactPoint` omitido) | Teléfono/email de contacto que se pueda publicar en el schema Organization |
-| 16 | Datos estructurados Product/Offer | No implementado (bloqueado) | Depende de la fila 13 (precios). No se añade schema Product/Offer hasta tener precios confirmados, para no publicar un `price` inventado |
+| 14 | Punto de contacto de la organización | `lib/structured-data.ts` (schema Organization, campo `contactPoint` omitido) | Teléfono/email de contacto que se pueda publicar en el schema Organization |
+| 15 | Datos estructurados Product/Offer | No implementado (bloqueado) | Depende de la fila 13 (precios). No se añade schema Product/Offer hasta tener precios confirmados, para no publicar un `price` inventado |
 
 ## Regla a partir de ahora
 

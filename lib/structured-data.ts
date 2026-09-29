@@ -7,7 +7,7 @@ export function getOrganizationJsonLd() {
     "@type": "Organization",
     name: site.name,
     url: site.url,
-    // TODO(client): add logo URL once a brand logo asset is confirmed
+    logo: new URL("/logo.svg", site.url).toString(),
     // TODO(client): add contactPoint (phone/email) once confirmed
   };
 }

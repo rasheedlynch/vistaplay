@@ -4,6 +4,7 @@ import { site } from "@/lib/site";
 
 export const THEME_COLOR = "#0F766E";
 export const BACKGROUND_COLOR = "#FAF7F2";
+export const INK_COLOR = "#0E1B2C";
 
 export const TITLE_TEMPLATE = "%s | VistaPlay";
 export const DEFAULT_TITLE = "VistaPlay — Televisión en streaming para tu hogar";

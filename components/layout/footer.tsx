@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { Logo } from "@/components/brand/logo";
 import { site } from "@/lib/site";
 
 const NAV_LINKS = [
@@ -25,9 +26,7 @@ export function Footer() {
       <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-3">
           <div>
-            <p className="font-heading text-lg font-bold text-ink">
-              {site.name}
-            </p>
+            <Logo className="text-lg" />
             <p className="text-small mt-2 max-w-xs">
               Televisión en streaming para hogares en España, con soporte
               cercano y sin complicaciones.

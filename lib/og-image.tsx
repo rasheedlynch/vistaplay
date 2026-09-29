@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 
-import { BACKGROUND_COLOR, DEFAULT_TITLE, THEME_COLOR } from "@/lib/seo";
+import { LOGO_TRIANGLE_PATH, LOGO_VIEWBOX, LOGO_V_PATH } from "@/lib/brand";
+import { BACKGROUND_COLOR, DEFAULT_TITLE, INK_COLOR, THEME_COLOR } from "@/lib/seo";
 
 export const ogImageSize = { width: 1200, height: 630 };
 export const ogImageAlt = DEFAULT_TITLE;
@@ -47,17 +48,12 @@ export async function renderOgImage() {
           fontFamily: soraData ? "Sora" : "sans-serif",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 48 }}>
-          <div
-            style={{
-              width: 14,
-              height: 44,
-              borderRadius: 7,
-              backgroundColor: THEME_COLOR,
-              display: "flex",
-            }}
-          />
-          <div style={{ fontSize: 36, fontWeight: 700, color: "#0E1B2C", display: "flex" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 48 }}>
+          <svg width="44" height="44" viewBox={LOGO_VIEWBOX}>
+            <path d={LOGO_V_PATH} fill={INK_COLOR} />
+            <path d={LOGO_TRIANGLE_PATH} fill={THEME_COLOR} />
+          </svg>
+          <div style={{ fontSize: 36, fontWeight: 700, color: INK_COLOR, display: "flex" }}>
             VistaPlay
           </div>
         </div>
@@ -65,7 +61,7 @@ export async function renderOgImage() {
           style={{
             fontSize: 60,
             fontWeight: 700,
-            color: "#0E1B2C",
+            color: INK_COLOR,
             lineHeight: 1.15,
             maxWidth: 920,
             display: "flex",
@@ -85,15 +81,13 @@ export async function renderOgImage() {
 export async function renderBrandIcon({
   width,
   height,
-  fontSize,
   radius,
 }: {
   width: number;
   height: number;
-  fontSize: number;
   radius: number;
 }) {
-  const soraData = await loadSora();
+  const markSize = Math.round(Math.min(width, height) * 0.62);
 
   return new ImageResponse(
     (
@@ -106,18 +100,14 @@ export async function renderBrandIcon({
           justifyContent: "center",
           backgroundColor: THEME_COLOR,
           borderRadius: radius,
-          fontFamily: soraData ? "Sora" : "sans-serif",
         }}
       >
-        <div style={{ color: "#FFFFFF", fontSize, fontWeight: 700, display: "flex" }}>
-          V
-        </div>
+        <svg width={markSize} height={markSize} viewBox={LOGO_VIEWBOX}>
+          <path d={LOGO_V_PATH} fill="#FFFFFF" />
+          <path d={LOGO_TRIANGLE_PATH} fill={BACKGROUND_COLOR} />
+        </svg>
       </div>
     ),
-    {
-      width,
-      height,
-      fonts: soraFonts(soraData),
-    }
+    { width, height }
   );
 }
