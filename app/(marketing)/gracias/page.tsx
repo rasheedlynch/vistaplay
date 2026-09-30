@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
-import { deviceLabel, ORDER_COOKIE_NAME, planLabel } from "@/lib/order-helpers";
+import { buildOrderWhatsAppMessage, ORDER_COOKIE_NAME } from "@/lib/order-helpers";
 import { buildMetadata } from "@/lib/seo";
 import { getWhatsAppUrl } from "@/lib/site";
 
@@ -19,6 +19,7 @@ type OrderCookie = {
   firstName?: string;
   plan?: string;
   device?: string;
+  reference?: string;
 };
 
 async function readOrderCookie(): Promise<OrderCookie> {
@@ -33,19 +34,10 @@ async function readOrderCookie(): Promise<OrderCookie> {
 }
 
 export default async function GraciasPage() {
-  const { firstName, plan, device } = await readOrderCookie();
-  const planText = plan ? planLabel(plan) : null;
-  const deviceText = device ? deviceLabel(device) : null;
+  const { firstName, plan, reference } = await readOrderCookie();
 
-  const messageLines = [
-    "Hola, acabo de enviar mi pedido en VistaPlay.",
-    firstName && `Soy ${firstName}.`,
-    planText && `Plan: ${planText}.`,
-    deviceText && `Dispositivo: ${deviceText}.`,
-    "¿Podemos activar el acceso?",
-  ].filter(Boolean);
-
-  const whatsappUrl = getWhatsAppUrl(messageLines.join(" "));
+  const whatsappUrl =
+    plan && reference ? getWhatsAppUrl(buildOrderWhatsAppMessage(plan, reference)) : null;
 
   return (
     <Section variant="paper" className="py-20">
@@ -56,6 +48,11 @@ export default async function GraciasPage() {
           con el enlace de pago y las instrucciones para activar tu acceso.
           Revisa también tu carpeta de spam, por si acaso.
         </p>
+        {reference && (
+          <p className="text-small mt-4">
+            Referencia de tu pedido: <strong className="text-ink">{reference}</strong>
+          </p>
+        )}
         <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button asChild size="lg">
             <a

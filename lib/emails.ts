@@ -1,7 +1,8 @@
-import { deviceLabel, planLabel } from "@/lib/order-helpers";
+import { buildOrderWhatsAppMessage, deviceLabel, planLabelWithPrice } from "@/lib/order-helpers";
 import { getWhatsAppUrl } from "@/lib/site";
 
 type OrderEmailData = {
+  reference: string;
   name: string;
   phone: string;
   email: string;
@@ -24,6 +25,21 @@ function escapeHtml(value: string): string {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+}
+
+function formatMadridDateTime(date: Date): string {
+  return date.toLocaleString("es-ES", {
+    dateStyle: "long",
+    timeStyle: "short",
+    timeZone: "Europe/Madrid",
+  });
+}
+
+// Keeps only digits; a bare 9-digit Spanish mobile gets the 34 country
+// code prefixed so wa.me links work without the customer having typed it.
+function normalizePhoneForWhatsApp(rawPhone: string): string {
+  const digits = rawPhone.replace(/\D/g, "");
+  return digits.length === 9 ? `34${digits}` : digits;
 }
 
 function emailShell(bodyHtml: string): string {
@@ -49,21 +65,25 @@ function emailShell(bodyHtml: string): string {
 }
 
 export function renderNotificationEmail(data: OrderEmailData): string {
+  const waLink = `https://wa.me/${normalizePhoneForWhatsApp(data.phone)}?text=${encodeURIComponent(
+    `Hola, te escribo por tu pedido ${data.reference} en VistaPlay.`
+  )}`;
+  const mailtoLink = `mailto:${data.email}`;
+
   const rows: [string, string][] = [
+    ["Referencia", escapeHtml(data.reference)],
     ["Nombre", escapeHtml(data.name)],
-    ["Teléfono", escapeHtml(data.phone)],
-    ["Email", escapeHtml(data.email)],
-    ["Plan", escapeHtml(planLabel(data.plan))],
-    ["Dispositivo", escapeHtml(deviceLabel(data.device))],
     [
-      "Fecha",
-      escapeHtml(
-        data.submittedAt.toLocaleString("es-ES", {
-          dateStyle: "long",
-          timeStyle: "short",
-        })
-      ),
+      "Teléfono",
+      `<a href="${waLink}" style="color:${COLORS.brand};">${escapeHtml(data.phone)}</a>`,
     ],
+    [
+      "Email",
+      `<a href="${mailtoLink}" style="color:${COLORS.brand};">${escapeHtml(data.email)}</a>`,
+    ],
+    ["Plan", escapeHtml(planLabelWithPrice(data.plan))],
+    ["Dispositivo", escapeHtml(deviceLabel(data.device))],
+    ["Fecha", escapeHtml(formatMadridDateTime(data.submittedAt))],
   ];
 
   const rowsHtml = rows
@@ -76,16 +96,16 @@ export function renderNotificationEmail(data: OrderEmailData): string {
   return emailShell(`
     <p style="margin:0 0 16px;font-size:16px;">Nuevo pedido recibido.</p>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${rowsHtml}</table>
+    <p style="margin:24px 0 0;"><a href="${waLink}" style="display:inline-block;background-color:${COLORS.brand};color:#FFFFFF;text-decoration:none;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:700;">Escribir al cliente por WhatsApp</a></p>
   `);
 }
 
 export function renderConfirmationEmail(data: OrderEmailData): string {
-  const whatsappUrl = getWhatsAppUrl(
-    `Hola, acabo de solicitar el plan ${planLabel(data.plan)} en VistaPlay.`
-  );
+  const whatsappUrl = getWhatsAppUrl(buildOrderWhatsAppMessage(data.plan, data.reference));
 
   const rows: [string, string][] = [
-    ["Plan", escapeHtml(planLabel(data.plan))],
+    ["Referencia", escapeHtml(data.reference)],
+    ["Plan", escapeHtml(planLabelWithPrice(data.plan))],
     ["Dispositivo", escapeHtml(deviceLabel(data.device))],
   ];
   const rowsHtml = rows
@@ -106,6 +126,9 @@ export function renderConfirmationEmail(data: OrderEmailData): string {
       de pago y las instrucciones para activar tu acceso.
     </p>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:16px 0;">${rowsHtml}</table>
+    <p style="margin:4px 0 16px;font-size:13px;color:${COLORS.ink};opacity:0.7;">
+      Precio final, sin costes adicionales
+    </p>
     <p style="margin:16px 0;font-size:14px;line-height:1.6;">
       Si no lo ves en un rato, revisa también tu carpeta de spam.
     </p>

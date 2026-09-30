@@ -1,5 +1,7 @@
 "use server";
 
+import { randomInt } from "node:crypto";
+
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { Resend } from "resend";
@@ -12,6 +14,19 @@ const MIN_SUBMIT_MS = 2000;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX = 5;
 const ORDER_COOKIE_MAX_AGE = 10 * 60; // seconds
+
+// No 0/O or 1/I — avoids characters that are easy to misread when a
+// customer reads the reference back over WhatsApp or the phone.
+const REFERENCE_ALPHABET = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
+const REFERENCE_LENGTH = 5;
+
+function generateOrderReference(): string {
+  let code = "";
+  for (let i = 0; i < REFERENCE_LENGTH; i++) {
+    code += REFERENCE_ALPHABET[randomInt(REFERENCE_ALPHABET.length)];
+  }
+  return `VP-${code}`;
+}
 
 // Simple in-memory limiter — resets on server restart/cold start, and is
 // per-instance only. Good enough for this scale; not a distributed limiter.
@@ -52,6 +67,7 @@ function extractValues(formData: FormData): OrderFormValues {
 }
 
 async function sendOrderEmails(order: {
+  reference: string;
   name: string;
   phone: string;
   email: string;
@@ -62,9 +78,11 @@ async function sendOrderEmails(order: {
   const apiKey = process.env.RESEND_API_KEY;
   const fromAddress = process.env.RESEND_FROM_EMAIL;
   const notifyAddress = process.env.ORDER_NOTIFICATION_EMAIL;
+  const replyTo = process.env.RESEND_REPLY_TO || undefined;
 
   const notificationHtml = renderNotificationEmail(order);
   const confirmationHtml = renderConfirmationEmail(order);
+  const firstName = order.name.trim().split(/\s+/)[0];
 
   if (!apiKey || !fromAddress || !notifyAddress) {
     if (process.env.NODE_ENV === "production") {
@@ -77,7 +95,7 @@ async function sendOrderEmails(order: {
     console.log("\n=== [DEV] Resend no configurado: volcando emails a consola ===");
     console.log(`--- Notificación interna -> ${notifyAddress ?? "(ORDER_NOTIFICATION_EMAIL vacío)"} ---`);
     console.log(notificationHtml);
-    console.log(`--- Confirmación al cliente -> ${order.email} ---`);
+    console.log(`--- Confirmación al cliente -> ${order.email} (Reply-To: ${replyTo ?? "ninguno"}) ---`);
     console.log(confirmationHtml);
     console.log("=== [DEV] fin del volcado de emails ===\n");
     return { ok: true };
@@ -89,13 +107,14 @@ async function sendOrderEmails(order: {
     await resend.emails.send({
       from: fromAddress,
       to: notifyAddress,
-      subject: `Nuevo pedido — ${order.name}`,
+      subject: `Nuevo pedido ${order.reference} — ${firstName}`,
       html: notificationHtml,
     });
     await resend.emails.send({
       from: fromAddress,
       to: order.email,
-      subject: "Hemos recibido tu pedido — VistaPlay",
+      ...(replyTo ? { replyTo } : {}),
+      subject: `Hemos recibido tu pedido ${order.reference} — VistaPlay`,
       html: confirmationHtml,
     });
     return { ok: true };
@@ -159,7 +178,8 @@ export async function submitOrder(
     };
   }
 
-  const order = { ...parsed.data, submittedAt: new Date() };
+  const reference = generateOrderReference();
+  const order = { ...parsed.data, reference, submittedAt: new Date() };
   const emailResult = await sendOrderEmails(order);
 
   if (!emailResult.ok) {
@@ -179,7 +199,7 @@ export async function submitOrder(
   const cookieStore = await cookies();
   cookieStore.set({
     name: ORDER_COOKIE_NAME,
-    value: JSON.stringify({ firstName, plan: order.plan, device: order.device }),
+    value: JSON.stringify({ firstName, plan: order.plan, device: order.device, reference }),
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",

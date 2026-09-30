@@ -2,7 +2,7 @@
 // free of the zod schema (lib/order.ts) so the client bundle never pulls
 // zod in just for these lookups/types.
 import { deviceOptions } from "@/lib/devices";
-import { plans } from "@/lib/plans";
+import { formatPrice, plans } from "@/lib/plans";
 
 export type OrderFormValues = {
   name: string;
@@ -32,6 +32,22 @@ export function planLabel(planId: string): string {
   return plans.find((plan) => plan.id === planId)?.name ?? planId;
 }
 
+// e.g. "Plan 1 mes — 9,99 €" — falls back to the plain name if the plan is
+// unknown or has no confirmed price yet (never fabricates one).
+export function planLabelWithPrice(planId: string): string {
+  const plan = plans.find((candidate) => candidate.id === planId);
+  if (!plan) return planId;
+  return plan.price !== null ? `${plan.name} — ${formatPrice(plan.price)}` : plan.name;
+}
+
 export function deviceLabel(deviceValue: string): string {
   return deviceOptions.find((device) => device.value === deviceValue)?.label ?? deviceValue;
+}
+
+// Single source for the WhatsApp prefill text so it reads the same
+// everywhere: "Hola, acabo de solicitar el Plan 1 mes en VistaPlay
+// (pedido VP-7K2QX)." — planLabel() already returns "Plan 1 mes", so this
+// must not prepend a redundant "el plan ...".
+export function buildOrderWhatsAppMessage(planId: string, reference: string): string {
+  return `Hola, acabo de solicitar el ${planLabel(planId)} en VistaPlay (pedido ${reference}).`;
 }
