@@ -6,34 +6,38 @@ import { Section } from "@/components/layout/section";
 
 const CATEGORIES: { icon: LucideIcon; name: string; description: string }[] = [
   {
-    icon: Tv,
-    name: "Canales nacionales y autonómicos",
-    description: "Las cadenas generalistas y autonómicas que ya conoces, en un solo lugar.",
+    icon: Trophy,
+    name: "Deporte en directo",
+    description:
+      "LaLiga, Premier League, Champions League, UEFA Nations League y más grandes competiciones europeas, en directo y en alta definición.",
   },
   {
-    icon: Trophy,
-    name: "Deportes",
-    description: "Canales deportivos para seguir tus disciplinas favoritas.",
+    icon: Tv,
+    name: "Canales nacionales e internacionales",
+    description:
+      "Organizados por categorías para que encuentres lo que buscas sin perder tiempo.",
   },
   {
     icon: Clapperboard,
-    name: "Cine",
-    description: "Películas para todos los gustos, listas para disfrutar cuando quieras.",
+    name: "Cine y series bajo demanda",
+    description:
+      "Un catálogo de películas y temporadas completas para ver a tu ritmo, sin horarios.",
   },
   {
-    icon: MonitorPlay,
-    name: "Series",
-    description: "Temporadas completas y estrenos para maratones sin fin.",
+    icon: Baby,
+    name: "Infantil",
+    description: "Programación segura y pensada para los más pequeños de la casa.",
   },
   {
     icon: Compass,
     name: "Documentales",
-    description: "Contenido documental para aprender y descubrir.",
+    description: "Para aprender y descubrir, cuando te apetezca.",
   },
   {
-    icon: Baby,
-    name: "Infantiles",
-    description: "Programación pensada para los más pequeños de la casa.",
+    icon: MonitorPlay,
+    name: "Todas tus pantallas",
+    description:
+      "Empieza a ver en el móvil y termina en el televisor del salón. Un acceso, todos tus dispositivos.",
   },
 ];
 
@@ -41,7 +45,7 @@ export function Incluye() {
   return (
     <Section id="incluye" variant="paper">
       <Container>
-        <h2 className="text-h2">Qué incluye</h2>
+        <h2 className="text-h2">Todo lo que incluye tu suscripción</h2>
         <p className="text-lead mt-4">
           Un único acceso con el contenido organizado por categorías, para
           que encuentres lo que buscas sin complicarte.

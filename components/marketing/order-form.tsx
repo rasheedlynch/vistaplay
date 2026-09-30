@@ -49,8 +49,8 @@ export function OrderForm() {
       <Container className="max-w-2xl">
         <h2 className="text-h2">Solicita tu plan</h2>
         <p className="text-lead mt-4">
-          Rellena tus datos y te enviamos el enlace de pago por email. No
-          pagas nada en este paso.
+          Rellena tus datos y te enviamos el enlace de pago seguro por
+          email. No pagas nada en este paso.
         </p>
 
         <Card className="mt-10">
@@ -210,7 +210,7 @@ export function OrderForm() {
                   Usaremos tus datos solo para gestionar tu pedido. Más
                   información en la{" "}
                   <Link
-                    href="/privacidad"
+                    href="/politica-de-privacidad"
                     className="text-brand underline-offset-4 hover:underline"
                   >
                     política de privacidad

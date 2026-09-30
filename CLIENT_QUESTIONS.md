@@ -8,11 +8,8 @@ Cada una está marcada en el código con un comentario `TODO(client)`.
 
 | # | Afirmación | Dónde aparece | Qué necesitamos confirmar |
 |---|---|---|---|
-| 3 | Precios incluyen IVA | No se menciona el IVA en ningún sitio hasta confirmar | ¿Los precios publicados incluyen IVA o hay que añadirlo? |
-| 5 | "Plan más elegido" | `app/styleguide/page.tsx`, badge sobre el plan de 12 meses | ¿Hay datos que respalden que este plan es el más contratado? |
+| 5 | "Plan más elegido" / "La favorita" | `app/styleguide/page.tsx` (badge de ejemplo); `components/marketing/planes.tsx` (el plan de 12 meses ahora lleva el tag "Mejor valor", una afirmación aritmética distinta — ver fila resuelta abajo; "La favorita"/"más elegido" como afirmación de popularidad sigue sin confirmar) | ¿Hay datos que respalden que este plan es el más contratado? |
 | 6 | Ahorro anual frente al pago mensual | `app/styleguide/page.tsx`, descripción de la tarjeta de plan | ¿Cuál es el ahorro real del plan de 12 meses frente al mensual? (Nota: ya mostramos el precio/mes de cada plan como dato neutro; esto es sobre añadir una afirmación comparativa tipo "ahorras X€") |
-| 7 | "Servicio con licencia a través de nuestro proveedor mayorista" | Homepage, franja de confianza (`components/marketing/trust-strip.tsx`) | Redacción legal exacta que se puede publicar sobre la relación con el mayorista |
-| 11 | Métodos de pago aceptados | Homepage, FAQ ("¿Qué métodos de pago aceptáis?") | Qué métodos de pago se ofrecerán realmente |
 | 12 | Número de WhatsApp Business | `lib/site.ts` (`NEXT_PUBLIC_WHATSAPP_NUMBER`, actualmente vacío) | Número real de contacto para las solicitudes por WhatsApp |
 | 14 | Punto de contacto de la organización | `lib/structured-data.ts` (schema Organization, campo `contactPoint` omitido) | Teléfono/email de contacto que se pueda publicar en el schema Organization |
 | 15 | Datos estructurados Product/Offer | No implementado | Los precios ya están confirmados (ver resueltas), así que esto ya no está bloqueado — pendiente de implementar en una fase futura |
@@ -29,25 +26,40 @@ Cada una está marcada en el código con un comentario `TODO(client)`.
 | 10 | Proceso de cancelación | Sin permanencia (fila 2) + garantía de devolución en 24h (nueva, ver abajo) |
 | 13 | Precio de cada plan | Prueba 24h 2 €; 1 mes 9,99 €; 3 meses 19,99 € (6,66 €/mes); 6 meses 34,99 € (5,83 €/mes); 12 meses 54,99 € (4,58 €/mes) |
 | — | Garantía de satisfacción | "Si no quedas satisfecho en las primeras 24 horas, te devolvemos el dinero" |
+| 3 | Precios incluyen IVA | Sí, IVA incluido en todos los precios mostrados |
+| 11 | Métodos de pago aceptados | Enlace de pago seguro por email; pago con tarjeta a través de Stripe o PayPal |
+| — | Tag "Mejor valor" en el plan de 12 meses | Confirmado como afirmación aritmética (es el equivalente mensual más bajo: 4,58 €/mes), no una afirmación de popularidad — distinta de la fila 5 |
+| — | Contenido de la FAQ "¿Qué incluye VistaPlay?" | Canales nacionales e internacionales; grandes competiciones de fútbol europeo: LaLiga, Premier League, Champions League, UEFA Nations League y otras |
+| 7 | "Servicio con licencia a través de nuestro proveedor mayorista" / "autorizado" | "VistaPlay comercializa servicios de IPTV como distribuidor autorizado a través de su proveedor mayorista." Redacción confirmada por el cliente (30/9) y publicada en `/aviso-legal`. |
+| 16 | "¿Es legal VistaPlay?" (pregunta FAQ) | Restaurada en `lib/faq.ts` (y en el JSON-LD FAQPage, misma fuente) con redacción neutra, coherente con la frase confirmada de la fila 7, y enlace al aviso legal. |
 
 ## Pendiente de revisión legal
 
-### Para el email de pago (TODO lawyer)
+### Mecanismo ACEPTO del email de pago (TODO lawyer)
 
-El formulario de pedido (`components/marketing/order-form.tsx`) ya no
-pide consentimiento explícito — solo nombre, teléfono, email, plan y
-dispositivo. El siguiente texto de renuncia al derecho de
-desistimiento debe incluirse en el email/página de pago (aún no
-implementado) para que el cliente lo acepte en el momento de pagar, no
-en el formulario de contacto inicial:
+El cliente (30/9) formalizó el mecanismo de consentimiento expreso para
+la pérdida del derecho de desistimiento, publicado en
+`/derecho-de-desistimiento`:
 
-> "Solicito la activación inmediata del servicio y acepto que, una vez
-> activado, pierdo el derecho de desistimiento, sin perjuicio de la
-> garantía de satisfacción de 24 horas."
+> "Al responder 'ACEPTO' al email de pago, el cliente otorga su
+> consentimiento expreso para el inicio inmediato del servicio y
+> reconoce que pierde su derecho de desistimiento una vez activado el
+> acceso."
 
-Pendiente de revisión por un abogado antes de usarse, y pendiente de
-decidir el mecanismo de aceptación (checkbox en la página de pago,
-confirmación por email, etc.).
+El email de pago en sí (con el enlace de pago seguro) todavía no está
+implementado en `lib/emails.ts` — cuando se implemente, debe incluir
+este texto y requerir la respuesta "ACEPTO" antes de enviar el enlace
+de pago o activar el servicio. Pendiente de revisión por un abogado
+antes de que la página entre en producción, aunque el contenido de
+negocio ya está confirmado por el cliente.
+
+### Otras secciones marcadas "REVISAR CON GESTOR"
+
+La política de privacidad (`/politica-de-privacidad`, sección 5, plazos
+de conservación de datos) incluye un marcador inline "REVISAR CON
+GESTOR" para el plazo exacto de conservación por motivos fiscales y
+mercantiles. Debe confirmarse con un gestor/asesoría antes de
+publicarse en producción.
 
 ## Regla a partir de ahora
 

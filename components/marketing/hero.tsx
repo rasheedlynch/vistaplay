@@ -29,13 +29,21 @@ export function Hero() {
           variants={reveal}
           transition={transition}
         >
+          {/* TODO(client): confirm exact licensing wording — see CLIENT_QUESTIONS.md #7. Requested copy said "Servicio de IPTV con licencia" (asserted); using the already-approved neutral eyebrow until confirmed. */}
+          <p className="text-small mb-3 uppercase tracking-wide">
+            Servicio de IPTV · España
+          </p>
           <h1 className="text-display text-ink">
-            Televisión en streaming, sin complicaciones
+            El deporte en directo, el cine y las series. Sin complicaciones.
           </h1>
+          {/* TODO(client): confirm exact licensing wording — see CLIENT_QUESTIONS.md #7. Requested copy said "autorizado para España" (banned wording per CLAUDE.md); using the already-approved neutral phrase instead. */}
           <p className="text-lead mt-6">
-            VistaPlay lleva canales nacionales y autonómicos, deporte, cine,
-            series y documentales a tu móvil y a tu televisor, con un equipo
-            que te acompaña por WhatsApp.
+            VistaPlay es un servicio de IPTV para España, con licencia a
+            través de nuestro proveedor mayorista: canales nacionales e
+            internacionales, las grandes competiciones de fútbol europeo —
+            LaLiga, Premier League, Champions League, UEFA Nations League y
+            más — y un catálogo de cine y series bajo demanda. En tu móvil,
+            tu tablet, tu ordenador y tu Smart TV.
           </p>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <Button asChild size="lg">
@@ -51,6 +59,9 @@ export function Hero() {
               </a>
             </Button>
           </div>
+          <p className="text-small mt-4">
+            Sin permanencia · IVA incluido · Garantía de 24 horas
+          </p>
         </motion.div>
         <motion.div
           initial="hidden"

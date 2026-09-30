@@ -12,15 +12,15 @@ const POINTS: { icon: LucideIcon; text: string }[] = [
   },
   {
     icon: MessageCircle,
-    text: "Soporte humano 24 horas por WhatsApp y email.",
+    text: "Soporte humano por WhatsApp y email.",
   },
   {
     icon: MonitorSmartphone,
-    text: "Disponible en tu móvil y en tu televisor.",
+    text: "En todos tus dispositivos.",
   },
   {
     icon: Unlock,
-    text: "Sin permanencia.",
+    text: "Sin permanencia ni letra pequeña.",
   },
 ];
 

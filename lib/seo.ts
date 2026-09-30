@@ -9,7 +9,7 @@ export const INK_COLOR = "#0E1B2C";
 export const TITLE_TEMPLATE = "%s | VistaPlay";
 export const DEFAULT_TITLE = "VistaPlay — Televisión en streaming para tu hogar";
 export const DEFAULT_DESCRIPTION =
-  "Televisión en streaming para tu hogar: canales nacionales y autonómicos, deporte, cine, series y documentales en tu móvil y TV, con soporte por WhatsApp.";
+  "Televisión en streaming para tu hogar: canales nacionales e internacionales, deporte, cine, series y documentales en tu móvil y TV, con soporte por WhatsApp.";
 
 type SeoOptions = {
   title?: string;

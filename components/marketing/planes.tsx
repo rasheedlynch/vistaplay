@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatPrice, plans } from "@/lib/plans";
@@ -15,12 +16,18 @@ export function Planes() {
       <Container>
         <h2 className="text-h2">Planes</h2>
         <p className="text-lead mt-4">
-          Varias formas de contratar VistaPlay, sin letra pequeña.
+          Varias formas de contratar VistaPlay, sin letra pequeña. Precio
+          final, IVA incluido.
         </p>
         <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {mainPlans.map((plan) => (
             <Card key={plan.id} className="flex flex-col">
               <CardHeader>
+                {plan.id === "12-meses" && (
+                  <div className="mb-2">
+                    <Badge>Mejor valor</Badge>
+                  </div>
+                )}
                 <CardTitle className="font-heading text-xl">
                   {plan.name}
                 </CardTitle>
@@ -41,7 +48,7 @@ export function Planes() {
                       </p>
                     )}
                     <p className="text-small mt-1">
-                      Precio final, sin costes adicionales
+                      Precio final, IVA incluido
                     </p>
                   </>
                 ) : (
@@ -65,8 +72,8 @@ export function Planes() {
                   </Link>
                 </Button>
                 <p className="text-small text-center">
-                  No pagas nada ahora. Te enviaremos el enlace de pago por
-                  email.
+                  No pagas nada ahora. Te enviaremos el enlace de pago
+                  seguro por email.
                 </p>
               </CardFooter>
             </Card>

@@ -6,19 +6,19 @@ const STEPS = [
     number: "1",
     title: "Elige tu plan y envía el pedido",
     description:
-      "Rellena el formulario con tus datos y el plan que prefieras. No necesitas pagar nada en este paso.",
+      "Rellena el formulario con tus datos y el plan que prefieras. No pagas nada en este paso.",
   },
   {
     number: "2",
-    title: "Recibe por email el enlace de pago y las instrucciones",
+    title: "Recibe tu enlace de pago seguro",
     description:
-      "Te enviamos el enlace de pago y los pasos a seguir. Si prefieres ir más rápido, escríbenos por WhatsApp.",
+      "Te enviamos por email un enlace de pago seguro — tarjeta con Stripe o PayPal — junto con las instrucciones de instalación.",
   },
   {
     number: "3",
     title: "Activa y empieza a ver",
     description:
-      "En cuanto confirmes el pago, activamos tu acceso en minutos.",
+      "En cuanto confirmamos tu pago, activamos tu acceso en minutos.",
   },
 ];
 
