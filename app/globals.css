@@ -4,18 +4,22 @@
 
 @layer base {
   :root {
-    /* "Cinematic premium" palette — HSL channels only, referenced as
+    /* Light "editorial" palette (default). HSL channels only, referenced as
        hsl(var(--x) / <alpha-value>) so opacity modifiers work. */
-    --background: 30 17% 7%; /* #15120F warm charcoal */
-    --surface: 30 15% 10%; /* #1E1A16 */
-    --border: 30 15% 16%; /* #2E2822 */
-    --border-strong: 30 12% 25%;
-    --foreground: 39 39% 93%; /* #F4EFE6 off-white */
-    --muted-foreground: 35 11% 62%; /* #A89F92 */
-    --primary: 37 70% 59%; /* #E0A84F amber — CTAs and highlights only */
+    --background: 37 42% 94%; /* #F6F1E9 warm off-white */
+    --surface: 38 49% 97%; /* #FBF8F3 */
+    --border: 35 31% 86%; /* #E6DDD0 */
+    --border-strong: 35 25% 74%;
+    --foreground: 30 17% 9%; /* #1C1814 warm charcoal */
+    --muted-foreground: 28 10% 38%; /* #6B6258 (5.3:1 on background) */
+    /* Amber for buttons/fills. Button text is always charcoal (8:1). */
+    --primary: 37 70% 59%; /* #E0A84F */
     --primary-hover: 37 72% 66%;
-    --primary-foreground: 30 17% 7%;
-    --destructive: 4 80% 70%;
+    --primary-foreground: 30 17% 9%;
+    /* Amber used for TEXT/links/icons: deeper on light for AA (#8A5A12, 5.3:1;
+       the requested #B9822F is only 3:1 on this background). */
+    --highlight: 36 77% 31%;
+    --destructive: 0 65% 38%;
 
     /* shadcn semantic tokens */
     --card: var(--surface);
@@ -28,10 +32,29 @@
     --accent: var(--surface);
     --accent-foreground: var(--foreground);
     --destructive-foreground: var(--background);
-    --input: var(--border-strong);
-    --ring: var(--primary);
+    --input: 36 10% 52%; /* form-field borders, >3:1 */
+    --ring: var(--highlight);
 
     --radius: 1rem;
+  }
+
+  /* Dark variant: wrap any block in .dark-section (hero, final CTA band,
+     footer) and every token-based class inside switches to the charcoal palette. */
+  .dark-section {
+    --background: 30 17% 7%; /* #15120F */
+    --surface: 30 15% 10%; /* #1E1A16 */
+    --border: 30 15% 16%; /* #2E2822 */
+    --border-strong: 30 12% 25%;
+    --foreground: 39 39% 93%; /* #F4EFE6 */
+    --muted-foreground: 35 11% 62%; /* #A89F92 */
+    --primary-foreground: 30 17% 7%;
+    --highlight: 37 70% 59%; /* #E0A84F */
+    --destructive: 4 80% 70%;
+    --input: 30 12% 25%;
+    --ring: var(--primary);
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    color-scheme: dark;
   }
 }
 
@@ -41,12 +64,12 @@
   }
 
   *:focus-visible {
-    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
   }
 
   html {
     @apply scroll-smooth;
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   body {
@@ -77,7 +100,7 @@
   }
 
   .text-eyebrow {
-    @apply font-sans text-xs font-semibold uppercase tracking-[0.18em] text-primary;
+    @apply font-sans text-xs font-semibold uppercase tracking-[0.18em] text-highlight;
   }
 
   .text-lead {

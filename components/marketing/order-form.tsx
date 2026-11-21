@@ -158,11 +158,11 @@ export function OrderForm({ defaultPlan }: OrderFormProps) {
             defaultChecked={values?.consent}
             aria-invalid={Boolean(fieldErrors?.consent)}
             aria-describedby={fieldErrors?.consent ? "order-consent-error" : undefined}
-            className="mt-1 h-5 w-5 shrink-0 cursor-pointer rounded-md border border-border-strong bg-background accent-[#E0A84F]"
+            className="mt-1 h-5 w-5 shrink-0 cursor-pointer rounded-md border border-border-strong bg-background accent-highlight"
           />
           <label htmlFor="order-consent" className="text-sm leading-relaxed text-muted-foreground">
             He leído y acepto la{" "}
-            <Link href="/politica-de-privacidad" className="text-primary underline underline-offset-4">
+            <Link href="/politica-de-privacidad" className="text-highlight underline underline-offset-4">
               Política de privacidad
             </Link>{" "}
             y autorizo el tratamiento de mis datos para gestionar mi solicitud.

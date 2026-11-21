@@ -3,7 +3,7 @@ import type { HTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
 interface SectionProps extends HTMLAttributes<HTMLElement> {
-  variant?: "default" | "surface";
+  variant?: "default" | "surface" | "dark";
 }
 
 export function Section({ className, variant = "default", ...props }: SectionProps) {
@@ -12,6 +12,7 @@ export function Section({ className, variant = "default", ...props }: SectionPro
       className={cn(
         "py-20 md:py-28",
         variant === "surface" && "border-y border-border bg-surface",
+        variant === "dark" && "dark-section",
         className
       )}
       {...props}

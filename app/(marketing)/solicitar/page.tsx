@@ -38,11 +38,11 @@ export default async function SolicitarPage({
           <p className="text-small mt-6 text-center">{GUARANTEE_TEXT}</p>
           <p className="text-small mt-3 text-center">
             ¿Prefieres probarlo antes?{" "}
-            <Link href="/prueba-gratis" className="text-primary underline underline-offset-4">
+            <Link href="/prueba-gratis" className="text-highlight underline underline-offset-4">
               Pide la prueba gratis de 24 horas
             </Link>{" "}
             o revisa los{" "}
-            <Link href="/planes" className="text-primary underline underline-offset-4">
+            <Link href="/planes" className="text-highlight underline underline-offset-4">
               planes
             </Link>
             .

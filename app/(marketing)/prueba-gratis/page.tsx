@@ -35,14 +35,14 @@ export default function PruebaGratisPage() {
                 "Disfrútala 24 horas. Si te convence, eliges el plan que prefieras.",
               ].map((text, index) => (
                 <li key={text} className="flex gap-4">
-                  <span className="font-heading text-2xl text-primary">{index + 1}</span>
+                  <span className="font-heading text-2xl text-highlight">{index + 1}</span>
                   <p className="text-body">{text}</p>
                 </li>
               ))}
             </ol>
             <p className="text-small mt-8">
               ¿Prefieres contratar directamente? Consulta los{" "}
-              <Link href="/planes" className="text-primary underline underline-offset-4">
+              <Link href="/planes" className="text-highlight underline underline-offset-4">
                 planes y precios
               </Link>
               .

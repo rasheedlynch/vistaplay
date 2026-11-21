@@ -18,7 +18,7 @@ export function DevicesPreview() {
         <ul className="mt-12 grid grid-cols-2 gap-4 lg:grid-cols-5">
           {deviceGuides.map((device) => (
             <li key={device.slug} className="rounded-2xl border border-border bg-surface p-5">
-              <DeviceIcon icon={device.icon} className="h-6 w-6 text-primary" />
+              <DeviceIcon icon={device.icon} className="h-6 w-6 text-highlight" />
               <p className="font-heading mt-4 text-lg font-medium leading-snug">{device.name}</p>
             </li>
           ))}

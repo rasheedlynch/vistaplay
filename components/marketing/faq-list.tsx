@@ -12,7 +12,7 @@ export function FaqList({ items }: { items: Faq[] }) {
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-md font-heading text-lg font-medium [&::-webkit-details-marker]:hidden">
             <h3 className="text-lg font-medium">{faq.question}</h3>
             <ChevronDown
-              className="h-5 w-5 shrink-0 text-primary transition-transform group-open:rotate-180"
+              className="h-5 w-5 shrink-0 text-highlight transition-transform group-open:rotate-180"
               aria-hidden="true"
             />
           </summary>

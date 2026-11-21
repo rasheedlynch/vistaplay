@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { BACKGROUND_COLOR, THEME_COLOR } from "@/lib/seo";
+import { THEME_COLOR } from "@/lib/seo";
 import { SITE_NAME } from "@/lib/site";
 
 export default function manifest(): MetadataRoute.Manifest {
@@ -9,7 +9,7 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: SITE_NAME,
     lang: "es",
     theme_color: THEME_COLOR,
-    background_color: BACKGROUND_COLOR,
+    background_color: THEME_COLOR,
     display: "browser",
   };
 }

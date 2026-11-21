@@ -16,7 +16,7 @@ export function PlansGrid() {
           key={plan.id}
           className={cn(
             "flex flex-col rounded-2xl border bg-surface p-7",
-            plan.featured ? "border-primary/50 shadow-lift" : "border-border"
+            plan.featured ? "border-primary shadow-lift ring-1 ring-primary" : "border-border"
           )}
         >
           <div className="flex min-h-7 items-center justify-between">
@@ -31,7 +31,7 @@ export function PlansGrid() {
           <ul className="mt-6 flex-1 space-y-3 border-t border-border pt-6">
             {INCLUDED.map((item) => (
               <li key={item} className="flex items-start gap-3 text-sm text-foreground/90">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-highlight" aria-hidden="true" />
                 {item}
               </li>
             ))}
@@ -49,7 +49,7 @@ export function PlansGrid() {
 
 export function TrialCard() {
   return (
-    <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-primary/40 bg-surface p-8 md:flex-row md:items-center md:p-10">
+    <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-primary/70 bg-surface p-8 md:flex-row md:items-center md:p-10">
       <div>
         <p className="text-eyebrow mb-3">Sin compromiso</p>
         <h3 className="text-h3">{TRIAL.name}</h3>

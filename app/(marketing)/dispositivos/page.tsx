@@ -36,7 +36,7 @@ export default function DispositivosPage() {
                 aria-labelledby={`${device.slug}-title`}
                 className="grid scroll-mt-24 grid-cols-1 gap-5 rounded-2xl border border-border bg-surface p-7 md:grid-cols-[auto_1fr] md:gap-8 md:p-9"
               >
-                <DeviceIcon icon={device.icon} className="h-8 w-8 text-primary" />
+                <DeviceIcon icon={device.icon} className="h-8 w-8 text-highlight" />
                 <div>
                   <h2 id={`${device.slug}-title`} className="text-h3">
                     {device.name}
@@ -45,7 +45,7 @@ export default function DispositivosPage() {
                   {device.hasGuide && (
                     <Link
                       href={`/dispositivos/${device.slug}`}
-                      className="mt-4 inline-block text-sm font-semibold text-primary underline-offset-4 hover:underline"
+                      className="mt-4 inline-block text-sm font-semibold text-highlight underline-offset-4 hover:underline"
                     >
                       Ver guía de instalación
                     </Link>
@@ -56,7 +56,7 @@ export default function DispositivosPage() {
           </div>
           <p className="text-small mt-8">
             ¿No ves tu dispositivo? Escríbenos desde la página de{" "}
-            <Link href="/contacto" className="text-primary underline underline-offset-4">
+            <Link href="/contacto" className="text-highlight underline underline-offset-4">
               contacto
             </Link>{" "}
             y te decimos cómo hacerlo.

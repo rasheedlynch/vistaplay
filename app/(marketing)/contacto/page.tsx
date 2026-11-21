@@ -28,8 +28,8 @@ export default function ContactoPage() {
       />
       <Section className="py-14 md:py-20">
         <Container className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          <div className="flex flex-col rounded-2xl border border-primary/40 bg-surface p-8">
-            <MessageCircle className="h-7 w-7 text-primary" aria-hidden="true" />
+          <div className="flex flex-col rounded-2xl border border-primary/70 bg-surface p-8">
+            <MessageCircle className="h-7 w-7 text-highlight" aria-hidden="true" />
             <h2 className="text-h3 mt-5">WhatsApp</h2>
             <p className="text-body mt-3 flex-1 text-muted-foreground">
               La forma más rápida de resolver una duda o de empezar tu prueba.
@@ -41,14 +41,14 @@ export default function ContactoPage() {
             </Button>
           </div>
           <div className="flex flex-col rounded-2xl border border-border bg-surface p-8">
-            <Mail className="h-7 w-7 text-primary" aria-hidden="true" />
+            <Mail className="h-7 w-7 text-highlight" aria-hidden="true" />
             <h2 className="text-h3 mt-5">Email</h2>
             <p className="text-body mt-3 flex-1 text-muted-foreground">
               Para consultas que prefieras detallar por escrito.
             </p>
             <a
               href={`mailto:${ORDER_EMAIL}`}
-              className="mt-8 break-all font-heading text-xl text-primary underline-offset-4 hover:underline"
+              className="mt-8 break-all font-heading text-xl text-highlight underline-offset-4 hover:underline"
             >
               {ORDER_EMAIL}
             </a>
@@ -57,11 +57,11 @@ export default function ContactoPage() {
         <Container className="mt-10">
           <p className="text-small">
             ¿Quieres empezar? Pide la{" "}
-            <Link href="/prueba-gratis" className="text-primary underline underline-offset-4">
+            <Link href="/prueba-gratis" className="text-highlight underline underline-offset-4">
               prueba gratis
             </Link>{" "}
             o mira los{" "}
-            <Link href="/planes" className="text-primary underline underline-offset-4">
+            <Link href="/planes" className="text-highlight underline underline-offset-4">
               planes
             </Link>
             .

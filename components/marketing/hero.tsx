@@ -17,7 +17,7 @@ export function Hero() {
   const transition = { duration: reduce ? 0 : 0.6, ease: "easeOut" as const };
 
   return (
-    <section className="relative overflow-hidden pb-20 pt-12 md:pb-28 md:pt-20">
+    <section className="dark-section relative overflow-hidden pb-20 pt-12 md:pb-28 md:pt-20">
       {/* Single warm spotlight — one hue, no multi-colour gradients */}
       <div
         aria-hidden="true"
@@ -47,7 +47,7 @@ export function Hero() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground underline underline-offset-4 hover:text-primary"
+              className="text-foreground underline underline-offset-4 hover:text-highlight"
             >
               Soporte por WhatsApp
             </a>

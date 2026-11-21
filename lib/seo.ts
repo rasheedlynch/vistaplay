@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 
-export const THEME_COLOR = "#15120F";
+export const THEME_COLOR = "#F6F1E9"; // light header / page background
 export const BACKGROUND_COLOR = "#15120F";
 export const SURFACE_COLOR = "#1E1A16";
 export const FOREGROUND_COLOR = "#F4EFE6";

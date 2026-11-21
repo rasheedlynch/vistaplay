@@ -46,7 +46,7 @@ export function Benefits() {
         <ul className="mt-14 grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {BENEFITS.map(({ icon: Icon, title, text }) => (
             <li key={title}>
-              <Icon className="h-6 w-6 text-primary" aria-hidden="true" />
+              <Icon className="h-6 w-6 text-highlight" aria-hidden="true" />
               <h3 className="font-heading mt-4 text-xl font-medium text-foreground">{title}</h3>
               <p className="text-small mt-2 max-w-[38ch] text-base leading-relaxed">{text}</p>
             </li>

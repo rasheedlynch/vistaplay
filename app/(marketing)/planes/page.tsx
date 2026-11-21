@@ -50,11 +50,11 @@ export default function PlanesPage() {
           </p>
           <p className="text-small mt-6">
             ¿Dudas sobre qué plan te conviene? Mira las{" "}
-            <Link href="/preguntas-frecuentes" className="text-primary underline underline-offset-4">
+            <Link href="/preguntas-frecuentes" className="text-highlight underline underline-offset-4">
               preguntas frecuentes
             </Link>{" "}
             o consulta los{" "}
-            <Link href="/dispositivos" className="text-primary underline underline-offset-4">
+            <Link href="/dispositivos" className="text-highlight underline underline-offset-4">
               dispositivos compatibles
             </Link>
             .

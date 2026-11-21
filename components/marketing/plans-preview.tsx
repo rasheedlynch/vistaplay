@@ -19,7 +19,7 @@ export function PlansPreview() {
           <Button asChild variant="secondary">
             <Link href="/planes">Ver todos los detalles de los planes</Link>
           </Button>
-          <Link href="/prueba-gratis" className="text-sm font-semibold text-primary underline-offset-4 hover:underline">
+          <Link href="/prueba-gratis" className="text-sm font-semibold text-highlight underline-offset-4 hover:underline">
             O empieza con la prueba gratis de 24 horas
           </Link>
         </div>

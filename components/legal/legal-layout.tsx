@@ -32,7 +32,7 @@ export function LegalSection({ title, children }: LegalSectionProps) {
   return (
     <section>
       <h2 className="text-h3 text-foreground">{title}</h2>
-      <div className="text-body mt-3 space-y-4 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-6 [&_strong]:text-foreground [&_a]:text-primary [&_a]:underline [&_a]:underline-offset-4">
+      <div className="text-body mt-3 space-y-4 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-6 [&_strong]:text-foreground [&_a]:text-highlight [&_a]:underline [&_a]:underline-offset-4">
         {children}
       </div>
     </section>

@@ -55,12 +55,13 @@ const config: Config = {
   				DEFAULT: 'hsl(var(--border) / <alpha-value>)',
   				strong: 'hsl(var(--border-strong) / <alpha-value>)'
   			},
+  			highlight: 'hsl(var(--highlight) / <alpha-value>)',
   			input: 'hsl(var(--input) / <alpha-value>)',
   			ring: 'hsl(var(--ring) / <alpha-value>)'
   		},
   		boxShadow: {
-  			soft: '0 1px 2px 0 rgb(0 0 0 / 0.35), 0 2px 10px -2px rgb(0 0 0 / 0.3)',
-  			lift: '0 16px 48px -16px rgb(0 0 0 / 0.7)'
+  			soft: '0 1px 2px 0 rgb(28 24 20 / 0.06), 0 2px 8px -2px rgb(28 24 20 / 0.08)',
+  			lift: '0 14px 36px -14px rgb(28 24 20 / 0.3)'
   		},
   		keyframes: {
   			'accordion-down': {

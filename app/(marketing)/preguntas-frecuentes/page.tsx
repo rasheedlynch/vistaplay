@@ -35,15 +35,15 @@ export default function PreguntasFrecuentesPage() {
           <FaqList items={faqs} />
           <p className="text-small mt-8">
             ¿Todo claro? Pide la{" "}
-            <Link href="/prueba-gratis" className="text-primary underline underline-offset-4">
+            <Link href="/prueba-gratis" className="text-highlight underline underline-offset-4">
               prueba gratis de 24 horas
             </Link>{" "}
             o consulta los{" "}
-            <Link href="/planes" className="text-primary underline underline-offset-4">
+            <Link href="/planes" className="text-highlight underline underline-offset-4">
               planes
             </Link>
             . También puedes{" "}
-            <Link href="/contacto" className="text-primary underline underline-offset-4">
+            <Link href="/contacto" className="text-highlight underline underline-offset-4">
               contactarnos
             </Link>
             .

@@ -35,13 +35,21 @@ IPTV reseller sites.
   on the website.
 
 ## Brand system ("calm premium")
-- UPDATED (redesign-seo): dark "cinematic premium" theme, replacing the earlier light theme
-- Colors: charcoal #15120F, surface #1E1A16, borders #2E2822, text #F4EFE6,
-  muted #A89F92, ONE amber accent #E0A84F (CTAs/highlights only)
+- UPDATED (redesign-seo): light "editorial" hybrid, replacing both the earlier
+  light-teal theme and the full dark theme
+- Default (light): background #F6F1E9, surface #FBF8F3, borders #E6DDD0, text
+  #1C1814, muted #6B6258. Amber #E0A84F is the button fill (charcoal text);
+  amber used as TEXT/links is the deeper #8A5A12 (`text-highlight`) for AA contrast
+- Dark variant: wrap a block in `.dark-section` (or `<Section variant="dark">`)
+  and all tokens switch to the charcoal palette (#15120F / #1E1A16 / #2E2822,
+  text #F4EFE6, muted #A89F92, amber text #E0A84F). Dark ONLY for: homepage
+  hero, final CTA band (CtaBanner) and footer
+- Never hard-code colors; use token classes (bg-background, text-highlight...)
+  so both variants work
 - Typography: Fraunces (headlines) + Inter (body/UI), loaded via next/font
 - All prices, contact data and URLs live in lib/site.ts only
 - Style: generous whitespace, rounded-2xl cards, soft shadows. Whitespace = trust
-- Banned: dark backgrounds, neon gradients (especially purple/blue),
+- Banned: dark backgrounds outside the .dark-section blocks, neon gradients (especially purple/blue),
   glassmorphism clichés, countdown timers, fake crossed-out prices,
   emoji-style icon grids
 

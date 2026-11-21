@@ -15,7 +15,7 @@ export function CtaBanner({
   className?: string;
 }) {
   return (
-    <Section className={className}>
+    <Section variant="dark" className={className}>
       <Container className="text-center">
         <h2 className="text-h2 mx-auto max-w-2xl">{title}</h2>
         <p className="text-lead mx-auto mt-4">{text}</p>
