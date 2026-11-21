@@ -10,7 +10,7 @@ export const SITE_NAME = "VistaPlay";
 export const WHATSAPP_NUMBER = "15172403924";
 
 // Receives every order / trial request. NOTE: spelled exactly as supplied.
-export const ORDER_EMAIL = "soport@vistaplay.shop";
+export const ORDER_EMAIL = "soporte@vistaplay.shop";
 
 export const PRICE_NOTE = "IVA incluido, sin permanencia";
 
