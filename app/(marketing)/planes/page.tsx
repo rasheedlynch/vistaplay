@@ -30,13 +30,13 @@ export default function PlanesPage() {
         lead={`Elige la duración que prefieras. ${PRICE_NOTE}.`}
       />
 
-      <Section className="pb-10 md:pb-12">
+      <Section className="pb-10 pt-12 md:pb-12 md:pt-14">
         <Container>
           <TrialCard />
         </Container>
       </Section>
 
-      <Section className="pt-10 md:pt-12">
+      <Section className="pb-12 pt-10 md:pb-14 md:pt-12">
         <Container>
           <h2 className="text-h2">Elige tu plan</h2>
           <p className="text-lead mt-4">
@@ -45,7 +45,7 @@ export default function PlanesPage() {
           <div className="mt-12">
             <PlansGrid />
           </div>
-          <p className="text-body mt-10 rounded-2xl border border-border bg-surface p-6">
+          <p className="text-body mt-10 max-w-none rounded-2xl border border-border bg-surface p-6">
             <strong className="text-foreground">Garantía de 24 horas.</strong> {GUARANTEE_TEXT}
           </p>
           <p className="text-small mt-6">
@@ -63,6 +63,7 @@ export default function PlanesPage() {
       </Section>
 
       <CtaBanner
+        className="pt-12 md:pt-16"
         title="¿Listo para empezar?"
         text="Haz tu pedido en un minuto. No pagas nada hasta que te contactemos con los datos de pago."
       />

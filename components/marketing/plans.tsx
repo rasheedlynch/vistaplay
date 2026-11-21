@@ -16,7 +16,7 @@ export function PlansGrid() {
           key={plan.id}
           className={cn(
             "flex flex-col rounded-2xl border bg-surface p-7",
-            plan.badge ? "border-primary/50 shadow-lift" : "border-border"
+            plan.featured ? "border-primary/50 shadow-lift" : "border-border"
           )}
         >
           <div className="flex min-h-7 items-center justify-between">
@@ -36,7 +36,7 @@ export function PlansGrid() {
               </li>
             ))}
           </ul>
-          <Button asChild className="mt-8 w-full" variant={plan.badge ? "primary" : "secondary"}>
+          <Button asChild className="mt-8 w-full" variant={plan.featured ? "primary" : "secondary"}>
             <Link href={`/solicitar?plan=${plan.id}`}>
               Elegir plan<span className="sr-only"> de {plan.name}</span>
             </Link>

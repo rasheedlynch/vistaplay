@@ -18,7 +18,6 @@ Cada una está marcada en el código con un comentario `TODO(client)`.
 | 19 | Compatibilidad por dispositivo (Smart TV, Android TV, Fire TV Stick, iPhone/iPad, ordenador) | `lib/devices.ts`, `/dispositivos` | Confirmar qué dispositivos y marcas son compatibles y cómo se instala en cada uno |
 | 20 | Precios nuevos: 3 meses 24,99 € (8,33 €/mes), 6 meses 39,99 € (6,67 €/mes); prueba de 24 h ahora gratuita (0 €) | `lib/site.ts` | Sustituyen a los precios confirmados anteriormente (19,99 € / 34,99 € / prueba 2 €); instrucción recibida en la sesión de rediseño. Confirmar por escrito |
 | 21 | Badge "Más popular" en el plan de 6 meses | `lib/site.ts` | Misma duda que la fila 5: ¿hay datos que lo respalden? |
-| 22 | Email de pedidos `soport@vistaplay.shop` (sin la "e" final) | `lib/site.ts` (`ORDER_EMAIL`) | Confirmar si es soport@ o soporte@; aparece en el pie, contacto y páginas legales |
 | 23 | Denominación social, NIF y domicilio | `lib/company.ts`, `/aviso-legal` | Datos reales de la empresa titular (art. 10 LSSICE) |
 
 ## Resueltas (confirmadas por el cliente)

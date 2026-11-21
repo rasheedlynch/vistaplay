@@ -7,13 +7,15 @@ import { WHATSAPP_URL } from "@/lib/site";
 
 export function CtaBanner({
   title = "¿Empezamos?",
+  className,
   text = "Pide tu prueba gratis de 24 horas o elige directamente tu plan. Si dudas, te acompañamos por WhatsApp.",
 }: {
   title?: string;
   text?: string;
+  className?: string;
 }) {
   return (
-    <Section>
+    <Section className={className}>
       <Container className="text-center">
         <h2 className="text-h2 mx-auto max-w-2xl">{title}</h2>
         <p className="text-lead mx-auto mt-4">{text}</p>

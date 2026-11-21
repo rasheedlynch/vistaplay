@@ -24,6 +24,8 @@ export type Plan = {
   /** Equivalent monthly price, when the plan is longer than one month. */
   perMonth: number | null;
   badge?: string;
+  /** Highlighted card (border + filled button). */
+  featured?: boolean;
   isTrial?: boolean;
 };
 
@@ -46,6 +48,7 @@ export const PLANS: Plan[] = [
     price: 54.99,
     perMonth: 4.58,
     badge: "Mejor valor",
+    featured: true,
   },
 ];
 
