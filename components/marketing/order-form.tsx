@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useActionState, useState } from "react";
 
 import { submitOrder } from "@/app/actions/order";
+import { PixelEvent } from "@/components/analytics/pixel-event";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -28,6 +29,10 @@ function FieldError({ id, message }: { id: string; message?: string }) {
 
 export function OrderForm({ defaultPlan }: OrderFormProps) {
   const [selectedPlan, setSelectedPlan] = useState<string>(getPlan(defaultPlan)?.id ?? "1m");
+  // InitiateCheckout fires once, for the plan selected when the page loads.
+  const [checkoutData] = useState(() => ({
+    content_name: getPlan(defaultPlan)?.name ?? getPlan("1m")?.name ?? "",
+  }));
   const [renderedAt] = useState(() => Date.now());
   const [state, formAction, isPending] = useActionState(submitOrder, initialOrderFormState);
 
@@ -43,6 +48,8 @@ export function OrderForm({ defaultPlan }: OrderFormProps) {
   const isTrial = getPlan(selectedPlan)?.isTrial;
 
   return (
+    <>
+    <PixelEvent event="InitiateCheckout" data={checkoutData} />
     <form
       key={formKey}
       action={formAction}
@@ -195,5 +202,6 @@ export function OrderForm({ defaultPlan }: OrderFormProps) {
         </p>
       </div>
     </form>
+    </>
   );
 }

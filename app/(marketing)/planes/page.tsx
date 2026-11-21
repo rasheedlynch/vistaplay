@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { PixelEvent } from "@/components/analytics/pixel-event";
 import { Container } from "@/components/layout/container";
 import { PageHeader } from "@/components/layout/page-header";
 import { Section } from "@/components/layout/section";
@@ -18,10 +19,13 @@ export const metadata: Metadata = buildMetadata({
   path: "/planes",
 });
 
+const VIEW_CONTENT_DATA = { content_name: "Planes", content_category: "planes" };
+
 export default function PlanesPage() {
   return (
     <>
       <JsonLd data={getServiceJsonLd()} />
+      <PixelEvent event="ViewContent" data={VIEW_CONTENT_DATA} />
       <PageHeader
         crumb="Planes"
         path="/planes"

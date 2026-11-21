@@ -12,6 +12,9 @@ export const WHATSAPP_NUMBER = "15172403924";
 // Receives every order / trial request. NOTE: spelled exactly as supplied.
 export const ORDER_EMAIL = "soporte@vistaplay.shop";
 
+// Meta Pixel (loaded only after the visitor accepts cookies).
+export const META_PIXEL_ID = "1537545604863196";
+
 export const PRICE_NOTE = "IVA incluido, sin permanencia";
 
 export type Plan = {

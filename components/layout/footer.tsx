@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { CookieSettingsButton } from "@/components/analytics/cookie-settings-button";
 import { Logo } from "@/components/brand/logo";
 import { LEGAL_LINKS, NAV_LINKS, ORDER_EMAIL, site } from "@/lib/site";
 
@@ -46,6 +47,7 @@ export function Footer() {
                 {link.label}
               </Link>
             ))}
+            <CookieSettingsButton className={`${linkClass} text-left`} />
           </nav>
         </div>
         <p className="text-small mt-12 border-t border-border pt-6">

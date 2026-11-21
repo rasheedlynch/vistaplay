@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
 
+import { CookieBanner } from "@/components/analytics/cookie-banner";
+import { MetaPixel } from "@/components/analytics/meta-pixel";
 import { Footer } from "@/components/layout/footer";
 import { WhatsAppFloat } from "@/components/layout/whatsapp-float";
 import { Header } from "@/components/layout/header";
@@ -52,10 +54,12 @@ export default function RootLayout({
         >
           Saltar al contenido
         </a>
+        <MetaPixel />
         <Header />
         <main id="contenido">{children}</main>
         <Footer />
         <WhatsAppFloat />
+        <CookieBanner />
       </body>
     </html>
   );

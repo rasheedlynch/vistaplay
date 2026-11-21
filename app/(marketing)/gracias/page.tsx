@@ -3,12 +3,13 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
+import { LeadEvent } from "@/components/analytics/lead-event";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { buildOrderWhatsAppMessage, ORDER_COOKIE_NAME } from "@/lib/order-helpers";
 import { buildMetadata } from "@/lib/seo";
-import { getWhatsAppUrl, WHATSAPP_URL } from "@/lib/site";
+import { getPlan, getWhatsAppUrl, WHATSAPP_URL } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
   title: "Pedido recibido",
@@ -38,8 +39,14 @@ export default async function GraciasPage() {
   const { firstName, plan, reference } = await readOrderCookie();
   const whatsappUrl = plan && reference ? getWhatsAppUrl(buildOrderWhatsAppMessage(plan, reference)) : WHATSAPP_URL;
 
+  const orderedPlan = getPlan(plan);
+
   return (
     <Section className="py-20 md:py-28">
+      {/* Lead only for a real, just-submitted order (cookie set by the server action). */}
+      {reference && orderedPlan && (
+        <LeadEvent reference={reference} planName={orderedPlan.name} value={orderedPlan.price} />
+      )}
       <Container className="max-w-2xl text-center">
         <p className="text-eyebrow mb-4">{firstName ? `Gracias, ${firstName}` : "Gracias"}</p>
         <h1 className="text-h1">Hemos recibido tu pedido</h1>

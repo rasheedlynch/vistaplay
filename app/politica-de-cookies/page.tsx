@@ -55,24 +55,29 @@ export default function PoliticaDeCookiesPage() {
             datos agregados y anónimos sobre las visitas al sitio.
           </li>
           <li>
-            <strong>Marketing:</strong> actualmente no utilizamos ninguna
-            cookie de publicidad o marketing.
+            <strong>Marketing:</strong> solo si las aceptas, utilizamos el
+            Píxel de Meta, proporcionado por Meta Platforms Ireland Ltd.
+            Su finalidad es la medición de la publicidad: saber cuántas
+            personas visitan nuestras páginas o solicitan un plan tras ver
+            un anuncio. Instala cookies propias (como _fbp) y envía a Meta
+            datos de navegación (páginas visitadas, plan elegido y su
+            importe). No enviamos tu nombre, email ni teléfono. Si
+            rechazas las cookies, el Píxel de Meta no se carga.
           </li>
         </ul>
       </LegalSection>
 
       <LegalSection title="3. Cómo aceptar, rechazar o configurar las cookies">
         <p>
-          Al acceder al sitio web verás un panel de gestión de cookies
-          (proporcionado por CookieYes) donde puedes aceptar todas las
-          cookies, rechazar las que no sean necesarias, o configurar tus
-          preferencias por categoría antes de continuar navegando.
+          Al acceder al sitio web verás un aviso donde puedes aceptar o
+          rechazar las cookies no necesarias, con la misma facilidad en
+          ambos casos. Guardamos tu elección en el almacenamiento local de
+          tu navegador para no volver a preguntarte.
         </p>
         <p>
-          Puedes cambiar tu configuración de cookies en cualquier momento
-          desde el icono de gestión de cookies disponible en el sitio web,
-          o eliminando las cookies ya almacenadas desde la configuración de
-          tu navegador.
+          Puedes cambiar tu elección en cualquier momento desde el enlace
+          «Configurar cookies» del pie de página, o eliminando los datos
+          almacenados desde la configuración de tu navegador.
         </p>
       </LegalSection>
     </LegalLayout>
