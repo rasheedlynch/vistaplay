@@ -12,7 +12,7 @@ export function Logo({ className }: LogoProps) {
     <span
       role="img"
       aria-label="VistaPlay"
-      className={cn("inline-flex items-center font-heading font-bold text-ink", className)}
+      className={cn("inline-flex items-center font-heading font-semibold text-foreground", className)}
     >
       <LogoMark className="h-[1em] w-[1em]" />
       <span aria-hidden="true" className="-ml-[0.1em]">

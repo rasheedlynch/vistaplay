@@ -8,6 +8,8 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = buildMetadata({
   title: "Derecho de desistimiento",
   path: "/derecho-de-desistimiento",
+  description:
+    "Derecho de desistimiento en VistaPlay: cuándo se aplica el plazo legal de 14 días, la excepción para contenido digital y nuestra garantía de 24 horas.",
   noIndex: true,
 });
 
@@ -86,7 +88,7 @@ export default function DerechoDeDesistimientoPage() {
           que el servicio haya sido activado), puede utilizar el siguiente
           modelo orientativo. Su cumplimentación y envío no es obligatoria.
         </p>
-        <div className="rounded-2xl border border-line bg-card p-6">
+        <div className="rounded-2xl border border-border bg-surface p-6">
           <p className="text-small italic">
             A la atención de {COMPANY.legalName}, {COMPANY.email}:
           </p>

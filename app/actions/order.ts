@@ -8,7 +8,8 @@ import { Resend } from "resend";
 
 import { renderConfirmationEmail, renderNotificationEmail } from "@/lib/emails";
 import { orderSchema } from "@/lib/order";
-import { ORDER_COOKIE_NAME, type OrderFormState, type OrderFormValues } from "@/lib/order-helpers";
+import { ORDER_EMAIL } from "@/lib/site";
+import { ORDER_COOKIE_NAME, planLabelWithPrice, type OrderFormState, type OrderFormValues } from "@/lib/order-helpers";
 
 const MIN_SUBMIT_MS = 2000;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
@@ -63,6 +64,7 @@ function extractValues(formData: FormData): OrderFormValues {
     email: String(formData.get("email") ?? ""),
     plan: String(formData.get("plan") ?? ""),
     device: String(formData.get("device") ?? ""),
+    consent: formData.get("consent") === "on",
   };
 }
 
@@ -77,14 +79,15 @@ async function sendOrderEmails(order: {
 }): Promise<{ ok: boolean }> {
   const apiKey = process.env.RESEND_API_KEY;
   const fromAddress = process.env.RESEND_FROM_EMAIL;
-  const notifyAddress = process.env.ORDER_NOTIFICATION_EMAIL;
+  // Orders always go to the address defined in lib/site.ts.
+  const notifyAddress = ORDER_EMAIL;
   const replyTo = process.env.RESEND_REPLY_TO || undefined;
 
   const notificationHtml = renderNotificationEmail(order);
   const confirmationHtml = renderConfirmationEmail(order);
   const firstName = order.name.trim().split(/\s+/)[0];
 
-  if (!apiKey || !fromAddress || !notifyAddress) {
+  if (!apiKey || !fromAddress) {
     if (process.env.NODE_ENV === "production") {
       console.error(
         "[order] Resend is not configured (missing env vars) in production — order email NOT sent"
@@ -93,7 +96,7 @@ async function sendOrderEmails(order: {
     }
 
     console.log("\n=== [DEV] Resend no configurado: volcando emails a consola ===");
-    console.log(`--- Notificación interna -> ${notifyAddress ?? "(ORDER_NOTIFICATION_EMAIL vacío)"} ---`);
+    console.log(`--- Notificación interna -> ${notifyAddress} ---`);
     console.log(notificationHtml);
     console.log(`--- Confirmación al cliente -> ${order.email} (Reply-To: ${replyTo ?? "ninguno"}) ---`);
     console.log(confirmationHtml);
@@ -107,7 +110,7 @@ async function sendOrderEmails(order: {
     await resend.emails.send({
       from: fromAddress,
       to: notifyAddress,
-      subject: `Nuevo pedido ${order.reference} — ${firstName}`,
+      subject: `Nuevo pedido ${order.reference} — ${firstName} (${planLabelWithPrice(order.plan)})`,
       html: notificationHtml,
     });
     await resend.emails.send({
@@ -162,7 +165,7 @@ export async function submitOrder(
     };
   }
 
-  const parsed = orderSchema.safeParse(values);
+  const parsed = orderSchema.safeParse({ ...values, consent: values.consent ? "on" : "" });
 
   if (!parsed.success) {
     const fieldErrors: Record<string, string> = {};
@@ -179,7 +182,8 @@ export async function submitOrder(
   }
 
   const reference = generateOrderReference();
-  const order = { ...parsed.data, reference, submittedAt: new Date() };
+  const { name, phone, email, plan, device } = parsed.data;
+  const order = { name, phone, email, plan, device, reference, submittedAt: new Date() };
   const emailResult = await sendOrderEmails(order);
 
   if (!emailResult.ok) {

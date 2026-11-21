@@ -8,6 +8,8 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = buildMetadata({
   title: "Aviso legal",
   path: "/aviso-legal",
+  description:
+    "Aviso legal de VistaPlay: datos identificativos del titular, condiciones de uso del sitio web, propiedad intelectual y legislación aplicable.",
   noIndex: true,
 });
 
@@ -24,11 +26,25 @@ export default function AvisoLegalPage() {
           Electrónico (LSSICE), se identifican a continuación los datos del
           titular de este sitio web.
         </p>
-        <p>
-          <strong>Titular del sitio web:</strong> {COMPANY.legalName} —{" "}
-          <strong>Dominio:</strong> {DOMAIN} —{" "}
-          <strong>Correo electrónico de contacto:</strong> {COMPANY.email}.
-        </p>
+        {/* TODO(client): rellenar denominación social, NIF y domicilio en lib/company.ts — no inventar datos */}
+        <ul>
+          <li>
+            <strong>Titular:</strong> {COMPANY.legalName}
+          </li>
+          <li>
+            <strong>NIF:</strong> {COMPANY.taxId}
+          </li>
+          <li>
+            <strong>Domicilio:</strong> {COMPANY.address}
+          </li>
+          <li>
+            <strong>Correo electrónico de contacto:</strong>{" "}
+            <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>
+          </li>
+          <li>
+            <strong>Dominio:</strong> {DOMAIN}
+          </li>
+        </ul>
       </LegalSection>
 
       <LegalSection title="2. Objeto">

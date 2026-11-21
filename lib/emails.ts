@@ -1,5 +1,5 @@
 import { buildOrderWhatsAppMessage, deviceLabel, planLabelWithPrice } from "@/lib/order-helpers";
-import { getWhatsAppUrl } from "@/lib/site";
+import { getPlan, getWhatsAppUrl } from "@/lib/site";
 
 type OrderEmailData = {
   reference: string;
@@ -12,10 +12,11 @@ type OrderEmailData = {
 };
 
 const COLORS = {
-  paper: "#FAF7F2",
-  ink: "#0E1B2C",
-  brand: "#0F766E",
-  line: "#E5DED4",
+  paper: "#F4EFE6",
+  ink: "#15120F",
+  brand: "#B77A14",
+  line: "#E0D8CB",
+  accent: "#E0A84F",
 };
 
 function escapeHtml(value: string): string {
@@ -96,12 +97,13 @@ export function renderNotificationEmail(data: OrderEmailData): string {
   return emailShell(`
     <p style="margin:0 0 16px;font-size:16px;">Nuevo pedido recibido.</p>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${rowsHtml}</table>
-    <p style="margin:24px 0 0;"><a href="${waLink}" style="display:inline-block;background-color:${COLORS.brand};color:#FFFFFF;text-decoration:none;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:700;">Escribir al cliente por WhatsApp</a></p>
+    <p style="margin:24px 0 0;"><a href="${waLink}" style="display:inline-block;background-color:${COLORS.accent};color:${COLORS.ink};text-decoration:none;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:700;">Escribir al cliente por WhatsApp</a></p>
   `);
 }
 
 export function renderConfirmationEmail(data: OrderEmailData): string {
   const whatsappUrl = getWhatsAppUrl(buildOrderWhatsAppMessage(data.plan, data.reference));
+  const isTrial = Boolean(getPlan(data.plan)?.isTrial);
 
   const rows: [string, string][] = [
     ["Referencia", escapeHtml(data.reference)],
@@ -115,19 +117,20 @@ export function renderConfirmationEmail(data: OrderEmailData): string {
     )
     .join("");
 
-  const whatsappButton = whatsappUrl
-    ? `<p style="margin:24px 0 0;"><a href="${whatsappUrl}" style="display:inline-block;background-color:${COLORS.brand};color:#FFFFFF;text-decoration:none;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:700;">Escríbenos por WhatsApp</a></p>`
-    : "";
+  const whatsappButton = `<p style="margin:24px 0 0;"><a href="${whatsappUrl}" style="display:inline-block;background-color:${COLORS.accent};color:${COLORS.ink};text-decoration:none;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:700;">Escríbenos por WhatsApp</a></p>`;
 
   return emailShell(`
     <p style="margin:0 0 16px;font-size:16px;">Hola ${escapeHtml(data.name)},</p>
     <p style="margin:0 0 16px;font-size:14px;line-height:1.6;">
-      Hemos recibido tu pedido. En breve recibirás en este correo el enlace
-      de pago y las instrucciones para activar tu acceso.
+      ${
+        isTrial
+          ? "Hemos recibido tu solicitud de prueba gratis. Te contactaremos por email y WhatsApp en breve para activarla."
+          : "Hemos recibido tu pedido. Te contactaremos por email y WhatsApp con los datos de pago en breve."
+      }
     </p>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:16px 0;">${rowsHtml}</table>
     <p style="margin:4px 0 16px;font-size:13px;color:${COLORS.ink};opacity:0.7;">
-      Precio final, sin costes adicionales
+      IVA incluido, sin permanencia
     </p>
     <p style="margin:16px 0;font-size:14px;line-height:1.6;">
       Si no lo ves en un rato, revisa también tu carpeta de spam.

@@ -8,6 +8,8 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = buildMetadata({
   title: "Política de privacidad",
   path: "/politica-de-privacidad",
+  description:
+    "Política de privacidad de VistaPlay: qué datos personales recogemos, para qué los usamos, cuánto tiempo los conservamos y cómo ejercer tus derechos.",
   noIndex: true,
 });
 

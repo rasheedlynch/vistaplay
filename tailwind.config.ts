@@ -9,8 +9,9 @@ const config: Config = {
   	extend: {
   		fontFamily: {
   			heading: [
-  				'var(--font-sora)',
-  				'sans-serif'
+  				'var(--font-fraunces)',
+  				'Georgia',
+  				'serif'
   			],
   			sans: [
   				'var(--font-inter)',
@@ -20,6 +21,7 @@ const config: Config = {
   		colors: {
   			background: 'hsl(var(--background) / <alpha-value>)',
   			foreground: 'hsl(var(--foreground) / <alpha-value>)',
+  			surface: 'hsl(var(--surface) / <alpha-value>)',
   			card: {
   				DEFAULT: 'hsl(var(--card) / <alpha-value>)',
   				foreground: 'hsl(var(--card-foreground) / <alpha-value>)'
@@ -30,6 +32,7 @@ const config: Config = {
   			},
   			primary: {
   				DEFAULT: 'hsl(var(--primary) / <alpha-value>)',
+  				hover: 'hsl(var(--primary-hover) / <alpha-value>)',
   				foreground: 'hsl(var(--primary-foreground) / <alpha-value>)'
   			},
   			secondary: {
@@ -48,24 +51,16 @@ const config: Config = {
   				DEFAULT: 'hsl(var(--destructive) / <alpha-value>)',
   				foreground: 'hsl(var(--destructive-foreground) / <alpha-value>)'
   			},
-  			border: 'hsl(var(--border) / <alpha-value>)',
+  			border: {
+  				DEFAULT: 'hsl(var(--border) / <alpha-value>)',
+  				strong: 'hsl(var(--border-strong) / <alpha-value>)'
+  			},
   			input: 'hsl(var(--input) / <alpha-value>)',
-  			ring: 'hsl(var(--ring) / <alpha-value>)',
-  			paper: 'hsl(var(--paper) / <alpha-value>)',
-  			ink: {
-  				DEFAULT: 'hsl(var(--ink) / <alpha-value>)',
-  				muted: 'hsl(var(--ink-muted) / <alpha-value>)'
-  			},
-  			brand: {
-  				DEFAULT: 'hsl(var(--brand) / <alpha-value>)',
-  				hover: 'hsl(var(--brand-hover) / <alpha-value>)'
-  			},
-  			tint: 'hsl(var(--tint) / <alpha-value>)',
-  			line: 'hsl(var(--line) / <alpha-value>)'
+  			ring: 'hsl(var(--ring) / <alpha-value>)'
   		},
   		boxShadow: {
-  			soft: '0 1px 2px 0 rgb(14 27 44 / 0.04), 0 2px 8px -2px rgb(14 27 44 / 0.06)',
-  			lift: '0 4px 16px -4px rgb(14 27 44 / 0.12), 0 12px 32px -8px rgb(14 27 44 / 0.14)'
+  			soft: '0 1px 2px 0 rgb(0 0 0 / 0.35), 0 2px 10px -2px rgb(0 0 0 / 0.3)',
+  			lift: '0 16px 48px -16px rgb(0 0 0 / 0.7)'
   		},
   		keyframes: {
   			'accordion-down': {

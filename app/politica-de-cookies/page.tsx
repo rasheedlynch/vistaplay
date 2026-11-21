@@ -7,6 +7,8 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = buildMetadata({
   title: "Política de cookies",
   path: "/politica-de-cookies",
+  description:
+    "Política de cookies de VistaPlay: qué cookies utiliza este sitio web, para qué sirven y cómo puedes gestionarlas o rechazarlas desde tu navegador.",
   noIndex: true,
 });
 
