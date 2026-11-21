@@ -23,7 +23,7 @@ export function DevicesPreview() {
             </li>
           ))}
         </ul>
-        <Button asChild variant="secondary" className="mt-10">
+        <Button asChild variant="secondary" className="mt-10 h-auto min-h-11 whitespace-normal py-2.5 text-center">
           <Link href="/dispositivos">Ver cómo se instala en cada dispositivo</Link>
         </Button>
       </Container>

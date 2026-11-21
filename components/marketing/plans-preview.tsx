@@ -16,7 +16,7 @@ export function PlansPreview() {
           <PlansGrid />
         </div>
         <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-          <Button asChild variant="secondary">
+          <Button asChild variant="secondary" className="h-auto min-h-11 whitespace-normal py-2.5 text-center">
             <Link href="/planes">Ver todos los detalles de los planes</Link>
           </Button>
           <Link href="/prueba-gratis" className="text-sm font-semibold text-highlight underline-offset-4 hover:underline">

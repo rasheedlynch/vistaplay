@@ -41,9 +41,13 @@ Cada una está marcada en el código con un comentario `TODO(client)`.
 
 ## Pendiente de revisión legal
 
-### Meta Pixel y banner de cookies (TODO lawyer)
+### Revisión general de las páginas legales
 
-Se añadió el Píxel de Meta (solo tras consentimiento) y un banner propio de cookies. La sección «Marketing» de `/politica-de-cookies` describe Meta Platforms Ireland y la medición publicitaria; la política de privacidad aún no menciona a Meta como destinatario. Revisar ambas con un abogado antes de producción.
+El cliente debe encargar la revisión de todas las páginas legales (aviso
+legal, privacidad, cookies, condiciones y desistimiento) a un abogado o
+gestor antes de producción. Incluye la sección «Marketing» de cookies y el
+apartado de destinatarios (Meta Platforms Ireland) de privacidad, ya
+redactados de forma coherente entre sí.
 
 ### Mecanismo ACEPTO del email de pago (TODO lawyer)
 

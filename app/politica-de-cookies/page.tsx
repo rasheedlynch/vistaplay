@@ -49,10 +49,8 @@ export default function PoliticaDeCookiesPage() {
             futuro se incorpora alguna.
           </li>
           <li>
-            <strong>Estadísticas:</strong> utilizamos Plausible Analytics,
-            una herramienta de analítica web que no utiliza cookies y no
-            recoge datos personales identificables; procesa únicamente
-            datos agregados y anónimos sobre las visitas al sitio.
+            <strong>Estadísticas:</strong> actualmente no utilizamos
+            ninguna herramienta de analítica con cookies.
           </li>
           <li>
             <strong>Marketing:</strong> solo si las aceptas, utilizamos el
