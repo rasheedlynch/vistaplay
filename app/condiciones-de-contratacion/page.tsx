@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 
 import { LegalLayout, LegalSection } from "@/components/legal/legal-layout";
 import { COMPANY } from "@/lib/company";
-import { formatPrice, plans } from "@/lib/plans";
 import { buildMetadata } from "@/lib/seo";
-import { site } from "@/lib/site";
+import { ALL_PLANS, formatPrice, site } from "@/lib/site";
 
 export const metadata: Metadata = buildMetadata({
   title: "Condiciones de contratación",
   path: "/condiciones-de-contratacion",
+  description:
+    "Condiciones de contratación de VistaPlay: planes, precios con IVA incluido, proceso de pedido, pago, garantía de 24 horas y cancelación sin permanencia.",
   noIndex: true,
 });
 
@@ -41,27 +42,27 @@ export default function CondicionesDeContratacionPage() {
         <div className="overflow-x-auto">
           <table className="w-full border-collapse text-left">
             <thead>
-              <tr className="border-b border-line">
-                <th className="py-2 pr-4 font-heading text-sm font-semibold text-ink">
+              <tr className="border-b border-border">
+                <th className="py-2 pr-4 font-heading text-sm font-semibold text-foreground">
                   Plan
                 </th>
-                <th className="py-2 pr-4 font-heading text-sm font-semibold text-ink">
+                <th className="py-2 pr-4 font-heading text-sm font-semibold text-foreground">
                   Duración
                 </th>
-                <th className="py-2 font-heading text-sm font-semibold text-ink">
+                <th className="py-2 font-heading text-sm font-semibold text-foreground">
                   Precio
                 </th>
               </tr>
             </thead>
             <tbody>
-              {plans.map((plan) => (
-                <tr key={plan.id} className="border-b border-line">
+              {ALL_PLANS.map((plan) => (
+                <tr key={plan.id} className="border-b border-border">
                   <td className="py-2 pr-4 text-sm">{plan.name}</td>
                   <td className="py-2 pr-4 text-sm">{plan.durationLabel}</td>
                   <td className="py-2 text-sm">
-                    {plan.price !== null ? formatPrice(plan.price) : "Próximamente"}
+                    {plan.isTrial ? "Gratis (0 €)" : formatPrice(plan.price)}
                     {plan.perMonth !== null && (
-                      <span className="text-ink-muted">
+                      <span className="text-muted-foreground">
                         {" "}
                         ({formatPrice(plan.perMonth)}/mes)
                       </span>

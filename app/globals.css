@@ -4,47 +4,57 @@
 
 @layer base {
   :root {
-    /* Brand palette — HSL channels only, referenced as hsl(var(--x) / <alpha-value>) */
-    --paper: 38 44% 96%;
-    --ink: 214 52% 11%;
-    --ink-muted: 214 20% 40%;
-    --brand: 175 77% 26%;
-    --brand-hover: 175 77% 21%;
-    --tint: 214 62% 95%;
-    --line: 35 25% 86%;
-    --white: 0 0% 100%;
-    --red: 0 72% 42%;
+    /* Light "editorial" palette (default). HSL channels only, referenced as
+       hsl(var(--x) / <alpha-value>) so opacity modifiers work. */
+    --background: 37 42% 94%; /* #F6F1E9 warm off-white */
+    --surface: 38 49% 97%; /* #FBF8F3 */
+    --border: 35 31% 86%; /* #E6DDD0 */
+    --border-strong: 35 25% 74%;
+    --foreground: 30 17% 9%; /* #1C1814 warm charcoal */
+    --muted-foreground: 28 10% 38%; /* #6B6258 (5.3:1 on background) */
+    /* Amber for buttons/fills. Button text is always charcoal (8:1). */
+    --primary: 37 70% 59%; /* #E0A84F */
+    --primary-hover: 37 72% 66%;
+    --primary-foreground: 30 17% 9%;
+    /* Amber used for TEXT/links/icons: deeper on light for AA (#8A5A12, 5.3:1;
+       the requested #B9822F is only 3:1 on this background). */
+    --highlight: 36 77% 31%;
+    --destructive: 0 65% 38%;
 
-    /* shadcn semantic tokens mapped to the brand palette */
-    --background: var(--paper);
-    --foreground: var(--ink);
-
-    --card: var(--white);
-    --card-foreground: var(--ink);
-
-    --popover: var(--white);
-    --popover-foreground: var(--ink);
-
-    --primary: var(--brand);
-    --primary-foreground: var(--white);
-
-    --secondary: var(--tint);
-    --secondary-foreground: var(--ink);
-
-    --muted: var(--tint);
-    --muted-foreground: var(--ink-muted);
-
-    --accent: var(--tint);
-    --accent-foreground: var(--ink);
-
-    --destructive: var(--red);
-    --destructive-foreground: var(--white);
-
-    --border: var(--line);
-    --input: var(--line);
-    --ring: var(--ink);
+    /* shadcn semantic tokens */
+    --card: var(--surface);
+    --card-foreground: var(--foreground);
+    --popover: var(--surface);
+    --popover-foreground: var(--foreground);
+    --secondary: var(--surface);
+    --secondary-foreground: var(--foreground);
+    --muted: var(--surface);
+    --accent: var(--surface);
+    --accent-foreground: var(--foreground);
+    --destructive-foreground: var(--background);
+    --input: 36 10% 52%; /* form-field borders, >3:1 */
+    --ring: var(--highlight);
 
     --radius: 1rem;
+  }
+
+  /* Dark variant: wrap any block in .dark-section (hero, final CTA band,
+     footer) and every token-based class inside switches to the charcoal palette. */
+  .dark-section {
+    --background: 30 17% 7%; /* #15120F */
+    --surface: 30 15% 10%; /* #1E1A16 */
+    --border: 30 15% 16%; /* #2E2822 */
+    --border-strong: 30 12% 25%;
+    --foreground: 39 39% 93%; /* #F4EFE6 */
+    --muted-foreground: 35 11% 62%; /* #A89F92 */
+    --primary-foreground: 30 17% 7%;
+    --highlight: 37 70% 59%; /* #E0A84F */
+    --destructive: 4 80% 70%;
+    --input: 30 12% 25%;
+    --ring: var(--primary);
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    color-scheme: dark;
   }
 }
 
@@ -54,45 +64,60 @@
   }
 
   *:focus-visible {
-    @apply outline-none ring-2 ring-ink ring-offset-2 ring-offset-paper;
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
   }
 
   html {
     @apply scroll-smooth;
+    color-scheme: light;
   }
 
   body {
     @apply bg-background font-sans text-base text-foreground;
-    line-height: 1.6;
+    line-height: 1.65;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.35);
   }
 }
 
 @layer components {
   .text-display {
-    @apply font-heading text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl md:text-6xl;
+    @apply font-heading text-[2.5rem] font-medium leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl;
   }
 
   .text-h1 {
-    @apply font-heading text-3xl font-bold leading-tight tracking-tight sm:text-4xl md:text-5xl;
+    @apply font-heading text-4xl font-medium leading-[1.1] tracking-tight sm:text-5xl;
   }
 
   .text-h2 {
-    @apply font-heading text-2xl font-semibold leading-snug tracking-tight sm:text-3xl md:text-4xl;
+    @apply font-heading text-3xl font-medium leading-tight tracking-tight sm:text-4xl;
   }
 
   .text-h3 {
-    @apply font-heading text-xl font-semibold leading-snug tracking-tight sm:text-2xl;
+    @apply font-heading text-xl font-medium leading-snug tracking-tight sm:text-2xl;
+  }
+
+  .text-eyebrow {
+    @apply font-sans text-xs font-semibold uppercase tracking-[0.18em] text-highlight;
   }
 
   .text-lead {
-    @apply max-w-[65ch] font-sans text-lg leading-relaxed text-ink-muted md:text-xl;
+    @apply max-w-[62ch] font-sans text-lg leading-relaxed text-muted-foreground md:text-xl;
   }
 
   .text-body {
-    @apply max-w-[65ch] font-sans text-base leading-relaxed text-foreground;
+    @apply max-w-[65ch] font-sans text-base leading-relaxed text-foreground/90;
   }
 
   .text-small {
-    @apply font-sans text-sm leading-normal text-ink-muted;
+    @apply font-sans text-sm leading-normal text-muted-foreground;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }

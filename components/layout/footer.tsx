@@ -1,61 +1,56 @@
 import Link from "next/link";
 
+import { CookieSettingsButton } from "@/components/analytics/cookie-settings-button";
 import { Logo } from "@/components/brand/logo";
-import { site } from "@/lib/site";
+import { LEGAL_LINKS, NAV_LINKS, ORDER_EMAIL, site } from "@/lib/site";
 
-const NAV_LINKS = [
-  { href: "#planes", label: "Planes" },
-  { href: "#como-funciona", label: "Cómo funciona" },
-  { href: "#preguntas", label: "Preguntas frecuentes" },
-  { href: "#contacto", label: "Contacto" },
+const PAGE_LINKS = [
+  { href: "/", label: "Inicio" },
+  ...NAV_LINKS,
+  { href: "/prueba-gratis", label: "Prueba gratis" },
+  { href: "/solicitar", label: "Solicitar" },
 ];
 
-const LEGAL_LINKS = [
-  { href: "/aviso-legal", label: "Aviso legal" },
-  { href: "/politica-de-privacidad", label: "Política de privacidad" },
-  { href: "/politica-de-cookies", label: "Política de cookies" },
-  { href: "/condiciones-de-contratacion", label: "Condiciones de contratación" },
-  { href: "/derecho-de-desistimiento", label: "Derecho de desistimiento" },
-];
+const linkClass = "text-sm text-muted-foreground transition-colors hover:text-foreground";
 
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-line bg-paper">
-      <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-3">
-          <div>
-            <Logo className="text-lg" />
-            <p className="text-small mt-2 max-w-xs">
+    <footer className="dark-section border-t border-border">
+      <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="lg:col-span-2">
+            <Logo className="text-xl" />
+            <p className="text-small mt-3 max-w-sm">
               Televisión en streaming para hogares en España, con soporte
               cercano y sin complicaciones.
             </p>
-          </div>
-          <nav aria-label="Navegación" className="flex flex-col gap-2">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-small text-ink hover:text-brand"
-              >
-                {link.label}
+            <p className="text-small mt-4">
+              <a href={`mailto:${ORDER_EMAIL}`} className="hover:text-foreground">
+                {ORDER_EMAIL}
               </a>
-            ))}
-          </nav>
-          <nav aria-label="Legal" className="flex flex-col gap-2">
-            {LEGAL_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-small text-ink hover:text-brand"
-              >
+            </p>
+          </div>
+          <nav aria-label="Páginas" className="flex flex-col gap-2.5">
+            <p className="text-eyebrow mb-1">Páginas</p>
+            {PAGE_LINKS.map((link) => (
+              <Link key={link.href} href={link.href} className={linkClass}>
                 {link.label}
               </Link>
             ))}
           </nav>
+          <nav aria-label="Legal" className="flex flex-col gap-2.5">
+            <p className="text-eyebrow mb-1">Legal</p>
+            {LEGAL_LINKS.map((link) => (
+              <Link key={link.href} href={link.href} className={linkClass}>
+                {link.label}
+              </Link>
+            ))}
+            <CookieSettingsButton className={`${linkClass} text-left`} />
+          </nav>
         </div>
-        <p className="text-small mt-10 border-t border-line pt-6">
+        <p className="text-small mt-12 border-t border-border pt-6">
           © {year} {site.name}
         </p>
       </div>

@@ -10,17 +10,12 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
+  SheetDescription,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { NAV_LINKS } from "@/lib/site";
 import { cn } from "@/lib/utils";
-
-const NAV_LINKS = [
-  { href: "#planes", label: "Planes" },
-  { href: "#como-funciona", label: "Cómo funciona" },
-  { href: "#preguntas", label: "Preguntas frecuentes" },
-  { href: "#contacto", label: "Contacto" },
-];
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -35,33 +30,30 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 border-b bg-paper transition-colors",
-        scrolled ? "border-line" : "border-transparent"
+        "sticky top-0 z-40 border-b bg-background transition-colors",
+        scrolled ? "border-border" : "border-transparent"
       )}
     >
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/">
+        <Link href="/" aria-label="VistaPlay — Inicio" className="rounded-md">
           <Logo className="text-xl" />
         </Link>
 
-        <nav
-          aria-label="Principal"
-          className="hidden items-center gap-8 md:flex"
-        >
+        <nav aria-label="Principal" className="hidden items-center gap-8 md:flex">
           {NAV_LINKS.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-ink hover:text-brand"
+              className="rounded-md text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
         <div className="hidden md:block">
           <Button asChild size="sm">
-            <a href="#planes">Ver planes</a>
+            <Link href="/prueba-gratis">Prueba gratis</Link>
           </Button>
         </div>
 
@@ -70,28 +62,26 @@ export function Header() {
             <button
               type="button"
               aria-label="Abrir menú"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-xl text-ink md:hidden"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full text-foreground md:hidden"
             >
               <Menu className="h-6 w-6" aria-hidden="true" />
             </button>
           </SheetTrigger>
-          <SheetContent side="right" className="flex flex-col gap-8 bg-paper">
+          <SheetContent side="right" className="flex flex-col gap-8 border-border bg-background">
             <SheetTitle className="font-heading text-lg">Menú</SheetTitle>
+            <SheetDescription className="sr-only">Navegación principal de VistaPlay</SheetDescription>
             <nav aria-label="Menú móvil" className="flex flex-col gap-6">
               {NAV_LINKS.map((link) => (
                 <SheetClose asChild key={link.href}>
-                  <a
-                    href={link.href}
-                    className="text-base font-medium text-ink"
-                  >
+                  <Link href={link.href} className="text-lg font-medium text-foreground">
                     {link.label}
-                  </a>
+                  </Link>
                 </SheetClose>
               ))}
             </nav>
             <SheetClose asChild>
-              <Button asChild size="default">
-                <a href="#planes">Ver planes</a>
+              <Button asChild>
+                <Link href="/prueba-gratis">Prueba gratis</Link>
               </Button>
             </SheetClose>
           </SheetContent>

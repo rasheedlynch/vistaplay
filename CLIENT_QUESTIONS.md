@@ -10,9 +10,15 @@ Cada una está marcada en el código con un comentario `TODO(client)`.
 |---|---|---|---|
 | 5 | "Plan más elegido" / "La favorita" | `app/styleguide/page.tsx` (badge de ejemplo); `components/marketing/planes.tsx` (el plan de 12 meses ahora lleva el tag "Mejor valor", una afirmación aritmética distinta — ver fila resuelta abajo; "La favorita"/"más elegido" como afirmación de popularidad sigue sin confirmar) | ¿Hay datos que respalden que este plan es el más contratado? |
 | 6 | Ahorro anual frente al pago mensual | `app/styleguide/page.tsx`, descripción de la tarjeta de plan | ¿Cuál es el ahorro real del plan de 12 meses frente al mensual? (Nota: ya mostramos el precio/mes de cada plan como dato neutro; esto es sobre añadir una afirmación comparativa tipo "ahorras X€") |
-| 12 | Número de WhatsApp Business | `lib/site.ts` (`NEXT_PUBLIC_WHATSAPP_NUMBER`, actualmente vacío) | Número real de contacto para las solicitudes por WhatsApp |
+| 12 | Número de WhatsApp Business | `lib/site.ts` (`WHATSAPP_NUMBER`, provisional 15172403924) | Número +34 definitivo |
 | 14 | Punto de contacto de la organización | `lib/structured-data.ts` (schema Organization, campo `contactPoint` omitido) | Teléfono/email de contacto que se pueda publicar en el schema Organization |
 | 15 | Datos estructurados Product/Offer | No implementado | Los precios ya están confirmados (ver resueltas), así que esto ya no está bloqueado — pendiente de implementar en una fase futura |
+| 17 | Velocidad de internet recomendada (~10 Mbps para HD) | `lib/faq.ts` (FAQ "¿Qué velocidad de internet necesito?") | ¿Qué velocidad mínima recomendáis para HD y para 4K? |
+| 18 | Pantallas simultáneas por plan | `lib/faq.ts` (FAQ "¿Cuántas pantallas...?") | ¿Cuántas pantallas simultáneas admite cada plan? |
+| 19 | Compatibilidad por dispositivo (Smart TV, Android TV, Fire TV Stick, iPhone/iPad, ordenador) | `lib/devices.ts`, `/dispositivos` | Confirmar qué dispositivos y marcas son compatibles y cómo se instala en cada uno |
+| 20 | Precios nuevos: 3 meses 24,99 € (8,33 €/mes), 6 meses 39,99 € (6,67 €/mes); prueba de 24 h ahora gratuita (0 €) | `lib/site.ts` | Sustituyen a los precios confirmados anteriormente (19,99 € / 34,99 € / prueba 2 €); instrucción recibida en la sesión de rediseño. Confirmar por escrito |
+| 21 | Badge "Más popular" en el plan de 6 meses | `lib/site.ts` | Misma duda que la fila 5: ¿hay datos que lo respalden? |
+| 23 | Denominación social, NIF y domicilio | `lib/company.ts`, `/aviso-legal` | Datos reales de la empresa titular (art. 10 LSSICE) |
 
 ## Resueltas (confirmadas por el cliente)
 
@@ -34,6 +40,14 @@ Cada una está marcada en el código con un comentario `TODO(client)`.
 | 16 | "¿Es legal VistaPlay?" (pregunta FAQ) | Restaurada en `lib/faq.ts` (y en el JSON-LD FAQPage, misma fuente) con redacción neutra, coherente con la frase confirmada de la fila 7, y enlace al aviso legal. |
 
 ## Pendiente de revisión legal
+
+### Revisión general de las páginas legales
+
+El cliente debe encargar la revisión de todas las páginas legales (aviso
+legal, privacidad, cookies, condiciones y desistimiento) a un abogado o
+gestor antes de producción. Incluye la sección «Marketing» de cookies y el
+apartado de destinatarios (Meta Platforms Ireland) de privacidad, ya
+redactados de forma coherente entre sí.
 
 ### Mecanismo ACEPTO del email de pago (TODO lawyer)
 

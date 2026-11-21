@@ -17,10 +17,10 @@ export function LogoMark({ className, variant = "default" }: LogoMarkProps) {
       aria-hidden="true"
       focusable="false"
     >
-      <path d={LOGO_V_PATH} className={isMono ? "fill-current" : "fill-ink"} />
+      <path d={LOGO_V_PATH} className={isMono ? "fill-current" : "fill-foreground"} />
       <path
         d={LOGO_TRIANGLE_PATH}
-        className={isMono ? "fill-current" : "fill-brand"}
+        className={isMono ? "fill-current" : "fill-primary"}
       />
     </svg>
   );

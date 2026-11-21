@@ -2,7 +2,7 @@
 // free of the zod schema (lib/order.ts) so the client bundle never pulls
 // zod in just for these lookups/types.
 import { deviceOptions } from "@/lib/devices";
-import { formatPrice, plans } from "@/lib/plans";
+import { formatPrice, getPlan } from "@/lib/site";
 
 export type OrderFormValues = {
   name: string;
@@ -10,6 +10,7 @@ export type OrderFormValues = {
   email: string;
   plan: string;
   device: string;
+  consent: boolean;
 };
 
 export type OrderFormState = {
@@ -29,25 +30,23 @@ export const initialOrderFormState: OrderFormState = { status: "idle" };
 export const ORDER_COOKIE_NAME = "vp_order";
 
 export function planLabel(planId: string): string {
-  return plans.find((plan) => plan.id === planId)?.name ?? planId;
+  return getPlan(planId)?.name ?? planId;
 }
 
-// e.g. "Plan 1 mes — 9,99 €" — falls back to the plain name if the plan is
-// unknown or has no confirmed price yet (never fabricates one).
+// e.g. "1 mes — 9,99 €" / "Prueba gratis 24 horas — Gratis (0 €)"
 export function planLabelWithPrice(planId: string): string {
-  const plan = plans.find((candidate) => candidate.id === planId);
+  const plan = getPlan(planId);
   if (!plan) return planId;
-  return plan.price !== null ? `${plan.name} — ${formatPrice(plan.price)}` : plan.name;
+  return `${plan.name} — ${plan.isTrial ? "Gratis (0 €)" : formatPrice(plan.price)}`;
 }
 
 export function deviceLabel(deviceValue: string): string {
   return deviceOptions.find((device) => device.value === deviceValue)?.label ?? deviceValue;
 }
 
-// Single source for the WhatsApp prefill text so it reads the same
-// everywhere: "Hola, acabo de solicitar el Plan 1 mes en VistaPlay
-// (pedido VP-7K2QX)." — planLabel() already returns "Plan 1 mes", so this
-// must not prepend a redundant "el plan ...".
+// Single source for the WhatsApp prefill text after an order.
 export function buildOrderWhatsAppMessage(planId: string, reference: string): string {
-  return `Hola, acabo de solicitar el ${planLabel(planId)} en VistaPlay (pedido ${reference}).`;
+  const plan = getPlan(planId);
+  const what = plan?.isTrial ? "la prueba gratis de 24 horas" : `el plan de ${plan?.name ?? planId}`;
+  return `Hola, acabo de solicitar ${what} en VistaPlay (pedido ${reference}).`;
 }

@@ -1,28 +1,32 @@
 import type { Metadata, Viewport } from "next";
-import { Sora, Inter } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 
+import { CookieBanner } from "@/components/analytics/cookie-banner";
+import { MetaPixel } from "@/components/analytics/meta-pixel";
 import { Footer } from "@/components/layout/footer";
+import { WhatsAppFloat } from "@/components/layout/whatsapp-float";
 import { Header } from "@/components/layout/header";
 import { JsonLd } from "@/components/seo/json-ld";
 import { buildMetadata, DEFAULT_TITLE, THEME_COLOR, TITLE_TEMPLATE } from "@/lib/seo";
-import { site } from "@/lib/site";
+import { SITE_URL } from "@/lib/site";
 import { getOrganizationJsonLd, getWebSiteJsonLd } from "@/lib/structured-data";
 
 import "./globals.css";
 
-const sora = Sora({
-  variable: "--font-sora",
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
-  weight: ["600", "700"],
+  display: "swap",
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
+  metadataBase: new URL(SITE_URL),
   ...buildMetadata(),
   title: {
     default: DEFAULT_TITLE,
@@ -41,12 +45,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`${sora.variable} ${inter.variable} antialiased`}>
+      <body className={`${fraunces.variable} ${inter.variable} antialiased`}>
         <JsonLd data={getOrganizationJsonLd()} />
         <JsonLd data={getWebSiteJsonLd()} />
+        <a
+          href="#contenido"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
+        >
+          Saltar al contenido
+        </a>
+        <MetaPixel />
         <Header />
-        <main>{children}</main>
+        <main id="contenido">{children}</main>
         <Footer />
+        <WhatsAppFloat />
+        <CookieBanner />
       </body>
     </html>
   );

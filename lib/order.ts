@@ -1,9 +1,9 @@
 import { z } from "zod";
 
 import { deviceOptions } from "@/lib/devices";
-import { plans } from "@/lib/plans";
+import { ALL_PLANS } from "@/lib/site";
 
-const planIds = plans.map((plan) => plan.id);
+const planIds: string[] = ALL_PLANS.map((plan) => plan.id);
 const deviceValues = deviceOptions.map((device) => device.value);
 
 // Accepts any reasonably-formatted phone number: strip spaces, dashes,
@@ -26,17 +26,18 @@ export const orderSchema = z.object({
     .string()
     .trim()
     .max(30, "Revisa el número de teléfono.")
-    .refine(isValidPhone, "Revisa el número de teléfono."),
+    .refine(isValidPhone, "Introduce un teléfono válido, por ejemplo 612 345 678."),
   email: z
     .string()
     .trim()
     .min(1, "Introduce tu email.")
     .max(254, "El email es demasiado largo.")
-    .email("Introduce un email válido."),
+    .email("Introduce un email válido, por ejemplo nombre@correo.com."),
   plan: z.string().refine((value) => planIds.includes(value), "Elige un plan."),
   device: z
     .string()
     .refine((value) => deviceValues.includes(value), "Elige un dispositivo."),
+  consent: z.literal("on", "Necesitamos tu consentimiento para poder contactarte."),
 });
 
 export type OrderInput = z.infer<typeof orderSchema>;

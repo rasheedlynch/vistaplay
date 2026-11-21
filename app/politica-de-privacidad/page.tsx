@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { LegalLayout, LegalSection } from "@/components/legal/legal-layout";
 import { COMPANY } from "@/lib/company";
@@ -8,6 +9,8 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = buildMetadata({
   title: "Política de privacidad",
   path: "/politica-de-privacidad",
+  description:
+    "Política de privacidad de VistaPlay: qué datos personales recogemos, para qué los usamos, cuánto tiempo los conservamos y cómo ejercer tus derechos.",
   noIndex: true,
 });
 
@@ -58,11 +61,22 @@ export default function PoliticaDePrivacidadPage() {
           relacionados con tu pedido (confirmación, enlace de pago,
           instrucciones de activación) utilizamos el proveedor Resend, cuyos
           servidores de procesamiento para esta finalidad se encuentran en
-          Irlanda (Unión Europea). No se realizan transferencias de datos
-          fuera del Espacio Económico Europeo.
+          Irlanda (Unión Europea). Con este proveedor no se realizan
+          transferencias de datos fuera del Espacio Económico Europeo.
         </p>
         <p>
-          No cedemos ni vendemos tus datos a terceros para fines distintos
+          Solo si aceptas las cookies de marketing, Meta Platforms Ireland
+          Ltd. recibe datos de navegación de este sitio web (páginas
+          visitadas, plan elegido y su importe, y el uso de los botones de
+          WhatsApp) a través del Píxel de Meta, con la finalidad de medir
+          la eficacia de nuestra publicidad. No le enviamos tu nombre,
+          email ni teléfono. Si rechazas las cookies, el Píxel de Meta no
+          se carga. Puedes consultar más detalles en nuestra{" "}
+          <Link href="/politica-de-cookies">Política de cookies</Link> y en
+          la política de privacidad de Meta.
+        </p>
+        <p>
+          Fuera de lo anterior, no cedemos ni vendemos tus datos a terceros para fines distintos
           de la gestión de tu pedido.
         </p>
       </LegalSection>
